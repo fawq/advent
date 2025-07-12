@@ -1,3 +1,5 @@
+mod graphs;
+use crate::graphs::{edge::Edge, graph::Graph};
 use pyo3::prelude::*;
 
 #[pyfunction]
@@ -11,5 +13,7 @@ fn hello_from_bin() -> String {
 #[pymodule]
 fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(hello_from_bin, m)?)?;
+    m.add_class::<Edge>()?;
+    m.add_class::<Graph>()?;
     Ok(())
 }
