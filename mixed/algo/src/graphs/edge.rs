@@ -10,12 +10,12 @@ pub struct Edge {
 #[pymethods]
 impl Edge {
     #[new]
-    pub fn new(from: usize, to: usize) -> Edge {
-        Edge { from, to }
+    pub fn new(from: usize, to: usize) -> Self {
+        Self { from, to }
     }
 
-    pub fn reverse(&self) -> Edge {
-        Edge {
+    pub fn reverse(&self) -> Self {
+        Self {
             from: self.to,
             to: self.from,
         }
@@ -26,6 +26,6 @@ impl Edge {
     }
 
     pub fn __repr__(&self) -> String {
-        format!("({} -> {})", self.from, self.to)
+        self.__str__()
     }
 }

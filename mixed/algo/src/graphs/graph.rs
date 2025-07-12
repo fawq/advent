@@ -42,6 +42,9 @@ impl Graph {
                 self.edges.insert(edge.reverse());
             }
         }
+
+        self.nodes.insert(edge.from);
+        self.nodes.insert(edge.to);
     }
 
     pub fn add_edge_by_coordinates(&mut self, from: usize, to: usize) {
