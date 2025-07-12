@@ -10,7 +10,7 @@ requires-python = ">=3.13"
 dependencies = []
 
 [project.scripts]
-test = "daytest:main"
+daytest = "daytest:main"
 
 [build-system]
 requires = ["hatchling"]

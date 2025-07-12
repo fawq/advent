@@ -1,5 +1,7 @@
-from algo._core import hello_from_bin
+from algo._core import Graph, Edge, GraphType
+
+__all__ = ["Graph", "Edge", "GraphType"]
 
 
 def main() -> None:
-    print(hello_from_bin())
+    print("Hello") 

@@ -20,4 +20,12 @@ impl Edge {
             to: self.from,
         }
     }
+
+    pub fn __str__(&self) -> String {
+        format!("{} -> {}", self.from, self.to)
+    }
+
+    pub fn __repr__(&self) -> String {
+        format!("{} -> {}", self.from, self.to)
+    }
 }
