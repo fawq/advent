@@ -22,10 +22,10 @@ impl Edge {
     }
 
     pub fn __str__(&self) -> String {
-        format!("{} -> {}", self.from, self.to)
+        format!("({} -> {})", self.from, self.to)
     }
 
     pub fn __repr__(&self) -> String {
-        format!("{} -> {}", self.from, self.to)
+        format!("({} -> {})", self.from, self.to)
     }
 }
