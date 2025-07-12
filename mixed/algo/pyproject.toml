@@ -1,0 +1,22 @@
+[project]
+name = "algo"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Krystian Krakowski", email = "kkrakowski22@gmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = []
+
+[project.scripts]
+algo = "algo:main"
+
+[tool.maturin]
+module-name = "algo._core"
+python-packages = ["algo"]
+python-source = "src"
+
+[build-system]
+requires = ["maturin>=1.0,<2.0"]
+build-backend = "maturin"

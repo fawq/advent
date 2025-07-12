@@ -1,0 +1,11 @@
+[workspace]
+members = ["mixed/*"]
+resolver = "3"
+
+[workspace.package]
+version = "0.0.1"
+edition = "2024"
+description = "Advent code"
+authors = ["Krystian Krakowski <kkrakowski22@gmail.com>"]
+readme = "README.md"
+rust-version = "1.88"
