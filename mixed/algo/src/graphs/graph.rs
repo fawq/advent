@@ -1,7 +1,9 @@
 use crate::graphs::edge::Edge;
 use pyo3::prelude::*;
 use std::collections::HashSet;
+use pyo3_stub_gen::derive::*;
 
+#[gen_stub_pyclass_enum]
 #[pyclass(eq, eq_int)]
 #[derive(Eq, PartialEq, Debug, Clone, Copy)]
 pub enum GraphType {
@@ -9,6 +11,7 @@ pub enum GraphType {
     BiDirectional,
 }
 
+#[gen_stub_pyclass]
 #[pyclass]
 #[derive(Eq, PartialEq, Debug)]
 pub struct Graph {
@@ -17,6 +20,7 @@ pub struct Graph {
     graph_type: GraphType,
 }
 
+#[gen_stub_pymethods]
 #[pymethods]
 impl Graph {
     #[new]

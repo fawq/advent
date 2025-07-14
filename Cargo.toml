@@ -9,3 +9,6 @@ description = "Advent code"
 authors = ["Krystian Krakowski <kkrakowski22@gmail.com>"]
 readme = "README.md"
 rust-version = "1.88"
+
+[workspace.dependencies]
+env_logger = "0.11.8"

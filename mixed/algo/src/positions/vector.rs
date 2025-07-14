@@ -1,5 +1,7 @@
 use pyo3::prelude::*;
+use pyo3_stub_gen::derive::*;
 
+#[gen_stub_pyclass]
 #[pyclass]
 #[derive(Hash, Eq, PartialEq, Debug, Clone, Copy)]
 pub struct Vector {
@@ -7,6 +9,7 @@ pub struct Vector {
     pub add_column: isize,
 }
 
+#[gen_stub_pymethods]
 #[pymethods]
 impl Vector {
     #[new]

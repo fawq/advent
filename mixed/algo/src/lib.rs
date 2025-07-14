@@ -9,6 +9,7 @@ use crate::positions::{
     vector::Vector,
 };
 use pyo3::prelude::*;
+use pyo3_stub_gen::define_stub_info_gatherer;
 
 /// A Python module implemented in Rust. The name of this function must match
 /// the `lib.name` setting in the `Cargo.toml`, else Python will not be able to
@@ -23,3 +24,5 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<Direction>()?;
     Ok(())
 }
+
+define_stub_info_gatherer!(stub_info);

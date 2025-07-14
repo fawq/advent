@@ -16,6 +16,7 @@ algo = "algo:main"
 module-name = "algo._core"
 python-packages = ["algo"]
 python-source = "src"
+features = ["pyo3/extension-module"]
 
 [build-system]
 requires = ["maturin>=1.0,<2.0"]

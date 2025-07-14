@@ -1,5 +1,7 @@
 use pyo3::prelude::*;
+use pyo3_stub_gen::derive::*;
 
+#[gen_stub_pyclass]
 #[pyclass]
 #[derive(Hash, Eq, PartialEq, Debug, Clone, Copy)]
 pub struct Edge {
@@ -7,6 +9,7 @@ pub struct Edge {
     pub to: usize,
 }
 
+#[gen_stub_pymethods]
 #[pymethods]
 impl Edge {
     #[new]

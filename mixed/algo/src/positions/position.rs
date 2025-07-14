@@ -1,6 +1,8 @@
 use crate::positions::vector::Vector;
 use pyo3::prelude::*;
+use pyo3_stub_gen::derive::*;
 
+#[gen_stub_pyclass_enum]
 #[pyclass(eq, eq_int)]
 #[derive(Hash, Eq, PartialEq, Debug, Clone, Copy)]
 pub enum Direction {
@@ -21,6 +23,7 @@ impl From<Direction> for Vector {
     }
 }
 
+#[gen_stub_pyclass]
 #[pyclass]
 #[derive(Hash, Eq, PartialEq, Debug, Clone, Copy)]
 pub struct Position {
@@ -28,6 +31,7 @@ pub struct Position {
     pub column: usize,
 }
 
+#[gen_stub_pymethods]
 #[pymethods]
 impl Position {
     #[new]

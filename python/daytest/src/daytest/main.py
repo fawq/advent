@@ -15,7 +15,7 @@ def check_graph() -> None:
 
 def check_position() -> None:
     position = Position(1, 2)
-    position.set_new_position_for_direction(Direction.Up)
+    position.set_new_position_for_direction(Direction.Down)
     print(position)
     position.set_new_position(Vector(-1, 0))
     print(position)
