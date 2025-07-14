@@ -1,7 +1,7 @@
 use crate::graphs::edge::Edge;
 use pyo3::prelude::*;
-use std::collections::HashSet;
 use pyo3_stub_gen::derive::*;
+use std::collections::HashSet;
 
 #[gen_stub_pyclass_enum]
 #[pyclass(eq, eq_int)]
@@ -47,12 +47,12 @@ impl Graph {
             }
         }
 
-        self.nodes.insert(edge.from);
-        self.nodes.insert(edge.to);
+        self.nodes.insert(edge.from_node);
+        self.nodes.insert(edge.to_node);
     }
 
-    pub fn add_edge_by_coordinates(&mut self, from: usize, to: usize) {
-        self.add_edge(Edge::new(from, to));
+    pub fn add_edge_by_coordinates(&mut self, from_node: usize, to_node: usize) {
+        self.add_edge(Edge::new(from_node, to_node));
     }
 
     pub fn get_nodes(&self) -> &HashSet<usize> {
@@ -68,7 +68,7 @@ impl Graph {
         //TODO: rethink cloned for this
         self.edges
             .iter()
-            .filter(|edge| edge.from == node)
+            .filter(|edge| edge.from_node == node)
             .cloned()
             .collect()
     }
@@ -77,7 +77,7 @@ impl Graph {
         //TODO: rethink cloned for this
         self.edges
             .iter()
-            .filter(|edge| edge.to == node)
+            .filter(|edge| edge.to_node == node)
             .cloned()
             .collect()
     }
@@ -85,8 +85,8 @@ impl Graph {
     pub fn get_node_neighbours(&self, node: usize) -> HashSet<usize> {
         self.edges
             .iter()
-            .filter(|edge| edge.from == node)
-            .map(|edge| edge.to)
+            .filter(|edge| edge.from_node == node)
+            .map(|edge| edge.to_node)
             .collect()
     }
 
@@ -98,8 +98,8 @@ impl Graph {
         self.edges.contains(&edge)
     }
 
-    pub fn is_edge_exists_by_coordinates(&self, from: usize, to: usize) -> bool {
-        self.edges.contains(&Edge::new(from, to))
+    pub fn is_edge_exists_by_coordinates(&self, from_node: usize, to_node: usize) -> bool {
+        self.edges.contains(&Edge::new(from_node, to_node))
     }
 
     pub fn remove_edge(&mut self, edge: Edge) {
@@ -114,13 +114,13 @@ impl Graph {
         }
     }
 
-    pub fn remove_edge_by_coordinates(&mut self, from: usize, to: usize) {
-        self.remove_edge(Edge::new(from, to));
+    pub fn remove_edge_by_coordinates(&mut self, from_node: usize, to_node: usize) {
+        self.remove_edge(Edge::new(from_node, to_node));
     }
 
     pub fn remove_node(&mut self, node: usize) {
         self.nodes.remove(&node);
         self.edges
-            .retain(|edge| edge.from != node && edge.to != node);
+            .retain(|edge| edge.from_node != node && edge.to_node != node);
     }
 }

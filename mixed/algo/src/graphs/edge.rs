@@ -5,27 +5,27 @@ use pyo3_stub_gen::derive::*;
 #[pyclass]
 #[derive(Hash, Eq, PartialEq, Debug, Clone, Copy)]
 pub struct Edge {
-    pub from: usize,
-    pub to: usize,
+    pub from_node: usize,
+    pub to_node: usize,
 }
 
 #[gen_stub_pymethods]
 #[pymethods]
 impl Edge {
     #[new]
-    pub fn new(from: usize, to: usize) -> Self {
-        Self { from, to }
+    pub fn new(from_node: usize, to_node: usize) -> Self {
+        Self { from_node, to_node }
     }
 
     pub fn reverse(&self) -> Self {
         Self {
-            from: self.to,
-            to: self.from,
+            from_node: self.to_node,
+            to_node: self.from_node,
         }
     }
 
     pub fn __str__(&self) -> String {
-        format!("({} -> {})", self.from, self.to)
+        format!("({} -> {})", self.from_node, self.to_node)
     }
 
     pub fn __repr__(&self) -> String {
