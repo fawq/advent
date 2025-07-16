@@ -55,6 +55,28 @@ impl Graph {
         self.add_edge(Edge::new(from_node, to_node));
     }
 
+    pub fn remove_node(&mut self, node: usize) {
+        self.nodes.remove(&node);
+        self.edges
+            .retain(|edge| edge.from_node != node && edge.to_node != node);
+    }
+
+    pub fn remove_edge(&mut self, edge: Edge) {
+        match self.graph_type {
+            GraphType::OneDirectional => {
+                self.edges.remove(&edge);
+            }
+            GraphType::BiDirectional => {
+                self.edges.remove(&edge);
+                self.edges.remove(&edge.reverse());
+            }
+        }
+    }
+
+    pub fn remove_edge_by_coordinates(&mut self, from_node: usize, to_node: usize) {
+        self.remove_edge(Edge::new(from_node, to_node));
+    }
+
     pub fn get_nodes(&self) -> &HashSet<usize> {
         &self.nodes
     }
@@ -100,27 +122,5 @@ impl Graph {
 
     pub fn is_edge_exists_by_coordinates(&self, from_node: usize, to_node: usize) -> bool {
         self.edges.contains(&Edge::new(from_node, to_node))
-    }
-
-    pub fn remove_edge(&mut self, edge: Edge) {
-        match self.graph_type {
-            GraphType::OneDirectional => {
-                self.edges.remove(&edge);
-            }
-            GraphType::BiDirectional => {
-                self.edges.remove(&edge);
-                self.edges.remove(&edge.reverse());
-            }
-        }
-    }
-
-    pub fn remove_edge_by_coordinates(&mut self, from_node: usize, to_node: usize) {
-        self.remove_edge(Edge::new(from_node, to_node));
-    }
-
-    pub fn remove_node(&mut self, node: usize) {
-        self.nodes.remove(&node);
-        self.edges
-            .retain(|edge| edge.from_node != node && edge.to_node != node);
     }
 }

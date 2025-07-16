@@ -17,18 +17,18 @@ impl Edge {
         Self { from_node, to_node }
     }
 
-    pub fn reverse(&self) -> Self {
-        Self {
-            from_node: self.to_node,
-            to_node: self.from_node,
-        }
-    }
-
     pub fn __str__(&self) -> String {
         format!("({} -> {})", self.from_node, self.to_node)
     }
 
     pub fn __repr__(&self) -> String {
         self.__str__()
+    }
+
+    pub fn reverse(&self) -> Self {
+        Self {
+            from_node: self.to_node,
+            to_node: self.from_node,
+        }
     }
 }

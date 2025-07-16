@@ -34,6 +34,14 @@ impl Vector {
         )
     }
 
+    pub fn __str__(&self) -> String {
+        format!("<{}, {}>", self.add_row, self.add_column)
+    }
+
+    pub fn __repr__(&self) -> String {
+        self.__str__()
+    }
+
     pub fn scalar_mul(&self, scalar: isize) -> Self {
         Self::new(self.add_row * scalar, self.add_column * scalar)
     }
@@ -44,13 +52,5 @@ impl Vector {
 
     pub fn taxicab_norm(&self) -> usize {
         self.add_row.unsigned_abs() + self.add_column.unsigned_abs()
-    }
-
-    pub fn __str__(&self) -> String {
-        format!("<{}, {}>", self.add_row, self.add_column)
-    }
-
-    pub fn __repr__(&self) -> String {
-        self.__str__()
     }
 }

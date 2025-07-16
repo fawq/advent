@@ -39,24 +39,32 @@ impl Position {
         Self { row, column }
     }
 
-    pub fn get_new_position(&self, vector: Vector) -> Position {
+    pub fn __str__(&self) -> String {
+        format!("[{}, {}]", self.row, self.column)
+    }
+
+    pub fn __repr__(&self) -> String {
+        self.__str__()
+    }
+
+    pub fn get_new_position_with_vector(&self, vector: Vector) -> Position {
         Position::new(
             self.row.saturating_add_signed(vector.add_row),
             self.column.saturating_add_signed(vector.add_column),
         )
     }
 
-    pub fn get_new_position_for_direction(&self, direction: Direction) -> Position {
-        self.get_new_position(direction.into())
+    pub fn get_new_position_with_direction(&self, direction: Direction) -> Position {
+        self.get_new_position_with_vector(direction.into())
     }
 
-    pub fn set_new_position(&mut self, vector: Vector) {
+    pub fn set_new_position_with_vector(&mut self, vector: Vector) {
         self.row = self.row.saturating_add_signed(vector.add_row);
         self.column = self.column.saturating_add_signed(vector.add_column);
     }
 
-    pub fn set_new_position_for_direction(&mut self, direction: Direction) {
-        self.set_new_position(direction.into())
+    pub fn set_new_position_with_direction(&mut self, direction: Direction) {
+        self.set_new_position_with_vector(direction.into())
     }
 
     pub fn vector_to(&self, other: &Position) -> Vector {
@@ -64,13 +72,5 @@ impl Position {
             other.row as isize - self.row as isize,
             other.column as isize - self.column as isize,
         )
-    }
-
-    pub fn __str__(&self) -> String {
-        format!("[{}, {}]", self.row, self.column)
-    }
-
-    pub fn __repr__(&self) -> String {
-        self.__str__()
     }
 }
