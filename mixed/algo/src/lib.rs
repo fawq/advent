@@ -1,12 +1,16 @@
 mod graphs;
+mod matrixes;
 mod positions;
-use crate::graphs::{
-    edge::Edge,
-    graph::{Graph, GraphType},
-};
 use crate::positions::{
     position::{Direction, Position},
     vector::Vector,
+};
+use crate::{
+    graphs::{
+        edge::Edge,
+        graph::{Graph, GraphType},
+    },
+    matrixes::static_matrix::StaticMatrix,
 };
 use pyo3::prelude::*;
 use pyo3_stub_gen::define_stub_info_gatherer;
@@ -22,6 +26,7 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<Vector>()?;
     m.add_class::<Position>()?;
     m.add_class::<Direction>()?;
+    m.add_class::<StaticMatrix>()?;
     Ok(())
 }
 
