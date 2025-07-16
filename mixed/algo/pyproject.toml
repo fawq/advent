@@ -15,7 +15,7 @@ algo = "algo:main"
 [tool.maturin]
 module-name = "algo._core"
 python-packages = ["algo"]
-python-source = "src"
+python-source = "python"
 features = ["pyo3/extension-module"]
 
 [build-system]
