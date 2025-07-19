@@ -1,1 +1,1 @@
-pub mod static_matrix;
+pub mod generic_matrix;
