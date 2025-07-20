@@ -6,7 +6,7 @@ use crate::graphs::{
     graph::{Graph, GraphType},
 };
 use crate::{
-    matrixes::generic_matrix::{BoolMatrix, FloatMatrix, IntMatrix, StringMatrix},
+    matrixes::generic_matrix::{BoolMatrix, CharMatrix, FloatMatrix, IntMatrix},
     positions::{
         position::{Direction, Position},
         vector::Vector,
@@ -29,7 +29,7 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<BoolMatrix>()?;
     m.add_class::<IntMatrix>()?;
     m.add_class::<FloatMatrix>()?;
-    m.add_class::<StringMatrix>()?;
+    m.add_class::<CharMatrix>()?;
     Ok(())
 }
 
