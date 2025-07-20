@@ -1,9 +1,13 @@
 mod graphs;
 mod matrixes;
 mod positions;
-use crate::graphs::{
-    edge::Edge,
-    graph::{Graph, GraphType},
+mod utils;
+use crate::{
+    graphs::{
+        edge::Edge,
+        graph::{Graph, GraphType},
+    },
+    utils::file::read_lines,
 };
 use crate::{
     matrixes::generic_matrix::{BoolMatrix, CharMatrix, FloatMatrix, IntMatrix},
@@ -30,6 +34,8 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<IntMatrix>()?;
     m.add_class::<FloatMatrix>()?;
     m.add_class::<CharMatrix>()?;
+
+    m.add_function(wrap_pyfunction!(read_lines, m)?)?;
     Ok(())
 }
 
