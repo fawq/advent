@@ -10,7 +10,10 @@ use crate::{
     utils::file::read_lines,
 };
 use crate::{
-    matrixes::generic_matrix::{BoolMatrix, CharMatrix, FloatMatrix, IntMatrix},
+    matrixes::generic_matrix::{
+        BoolMatrix, CharMatrix, F32Matrix, F64Matrix, I8Matrix, I16Matrix, I32Matrix, I64Matrix,
+        U8Matrix, U16Matrix, U32Matrix, U64Matrix,
+    },
     positions::{
         position::{Direction, Position},
         vector::Vector,
@@ -31,9 +34,17 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<Position>()?;
     m.add_class::<Direction>()?;
     m.add_class::<BoolMatrix>()?;
-    m.add_class::<IntMatrix>()?;
-    m.add_class::<FloatMatrix>()?;
     m.add_class::<CharMatrix>()?;
+    m.add_class::<I8Matrix>()?;
+    m.add_class::<I16Matrix>()?;
+    m.add_class::<I32Matrix>()?;
+    m.add_class::<I64Matrix>()?;
+    m.add_class::<U8Matrix>()?;
+    m.add_class::<U16Matrix>()?;
+    m.add_class::<U32Matrix>()?;
+    m.add_class::<U64Matrix>()?;
+    m.add_class::<F32Matrix>()?;
+    m.add_class::<F64Matrix>()?;
 
     m.add_function(wrap_pyfunction!(read_lines, m)?)?;
     Ok(())

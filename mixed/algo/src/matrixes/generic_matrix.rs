@@ -113,7 +113,15 @@ macro_rules! create_matrix {
     };
 }
 
-create_matrix!(IntMatrix, i32);
+create_matrix!(I8Matrix, i8);
+create_matrix!(I16Matrix, i16);
+create_matrix!(I32Matrix, i32);
+create_matrix!(I64Matrix, i64);
+create_matrix!(U8Matrix, u8);
+create_matrix!(U16Matrix, u16);
+create_matrix!(U32Matrix, u32);
+create_matrix!(U64Matrix, u64);
+create_matrix!(F32Matrix, f32);
+create_matrix!(F64Matrix, f64);
 create_matrix!(BoolMatrix, bool);
 create_matrix!(CharMatrix, char);
-create_matrix!(FloatMatrix, f64);
