@@ -5,16 +5,18 @@ description = "Advent code"
 readme = "README.md"
 requires-python = ">=3.13"
 authors = [{name = "Krystian Krakowski", email = "kkrakowski22@gmail.com"}]
-dependencies = []
+dependencies = [
+    "numpy>=2.3.2",
+]
 
 [tool.uv.workspace]
 members = ["python/*", "mixed/*"]
 
 [dependency-groups]
 dev = [
-    "mypy>=1.16.1",
-    "pytest>=8.4.1",
-    "ruff>=0.12.3",
+    "mypy==1.16.1",
+    "pytest==8.4.1",
+    "ruff==0.12.3",
 ]
 
 [tool.uv]

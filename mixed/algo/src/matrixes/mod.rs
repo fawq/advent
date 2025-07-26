@@ -1,1 +1,1 @@
-pub mod generic_matrix;
+pub mod matrix;

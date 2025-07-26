@@ -10,7 +10,7 @@ use crate::{
     utils::file::read_lines,
 };
 use crate::{
-    matrixes::generic_matrix::{
+    matrixes::matrix::{
         BoolMatrix, CharMatrix, F32Matrix, F64Matrix, I8Matrix, I16Matrix, I32Matrix, I64Matrix,
         U8Matrix, U16Matrix, U32Matrix, U64Matrix,
     },
