@@ -1,15 +1,15 @@
-from typing import Counter
-from algo import read_lines_to_vec_i32
 import numpy as np
+from algo import read_lines_to_vec_i32
+from numba import njit
 
-def get_from_counter(key, counter):
-    result = counter.get(key)
-    return result if result is not None else 0
+
+@njit
+def calculate_similarity_score(array_numbers: np.typing.NDArray[np.int32]) -> int:
+    counts = np.array([np.sum(array_numbers[:, 1] == x) for x in array_numbers[:, 0]])
+    similarity_score = array_numbers[:, 0] * counts
+
+    return similarity_score.sum()
 
 def day_02_main() -> int:
     array_numbers = read_lines_to_vec_i32("python/advent_2024_01/data/data.txt")
-    array_counter_of_left = Counter(array_numbers[:, 1])
-    get_counter = np.vectorize(get_from_counter)
-    similarity_score = array_numbers[:, 0] * get_counter(array_numbers[:, 0], array_counter_of_left)
-
-    return similarity_score.sum()
+    return calculate_similarity_score(array_numbers)

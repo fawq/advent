@@ -6,7 +6,8 @@ readme = "README.md"
 requires-python = ">=3.13"
 authors = [{name = "Krystian Krakowski", email = "kkrakowski22@gmail.com"}]
 dependencies = [
-    "numpy==2.3.2",
+    "numba==0.61.2",
+    "numpy==2.2.6",
 ]
 
 [tool.uv.workspace]
@@ -21,3 +22,25 @@ dev = [
 
 [tool.uv]
 cache-keys = [{file = "pyproject.toml"}, {file = "mixed/*/Cargo.toml"}, {file = "**/*.rs"}]
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "D100",
+    "D103",
+    "D104",
+    "D203",
+    "D212",
+    "COM812",
+    "PLR2004",
+    "PYI034",
+    "S101",
+    "T201",
+    "ICN001",
+    "PYI029",
+    "RUF100"
+]
+
+[[tool.mypy.overrides]]
+module = ["numba.*"]
+ignore_missing_imports = true

@@ -2,9 +2,10 @@
 # ruff: noqa: E501, F401
 
 import builtins
+from enum import Enum
+
 import numpy
 import numpy.typing
-from enum import Enum
 
 class BoolMatrix:
     def __new__(cls, height:builtins.int, width:builtins.int) -> BoolMatrix: ...
