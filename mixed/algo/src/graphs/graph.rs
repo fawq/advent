@@ -1,6 +1,6 @@
 use crate::graphs::edge::Edge;
-use pyo3::prelude::*;
-use pyo3_stub_gen::derive::*;
+use pyo3::{pyclass, pymethods};
+use pyo3_stub_gen::derive::{gen_stub_pyclass, gen_stub_pyclass_enum, gen_stub_pymethods};
 use std::collections::HashSet;
 
 #[gen_stub_pyclass_enum]

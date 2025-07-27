@@ -1,39 +1,34 @@
-use pyo3::prelude::*;
-use pyo3_stub_gen::derive::*;
+use pyo3::{pyclass, pymethods};
+use pyo3_stub_gen::derive::{gen_stub_pyclass, gen_stub_pymethods};
 
 use crate::positions::position::Position;
+use numpy::ndarray::Array2;
 
 macro_rules! create_matrix {
     ($name: ident, $type: ident) => {
         #[gen_stub_pyclass]
         #[pyclass]
         pub struct $name {
-            matrix: Vec<Vec<$type>>,
+            matrix: Array2<$type>,
             height: usize,
             width: usize,
-        }
-
-        impl Default for $name {
-            fn default() -> Self {
-                Self::new()
-            }
         }
 
         #[gen_stub_pymethods]
         #[pymethods]
         impl $name {
             #[new]
-            pub fn new() -> Self {
+            pub fn new(height: usize, width: usize) -> Self {
                 Self {
-                    matrix: Vec::new(),
-                    height: 0,
-                    width: 0,
+                    matrix: Array2::default((height, width)),
+                    height,
+                    width,
                 }
             }
 
             pub fn __str__(&self) -> String {
                 let mut result = String::new();
-                for row in &self.matrix {
+                for row in self.matrix.rows() {
                     for element in row {
                         result.push_str(&element.to_string());
                     }
@@ -55,31 +50,13 @@ macro_rules! create_matrix {
                 self.width
             }
 
-            pub fn set_size(&mut self, height: usize, width: usize, default: $type) {
-                self.matrix = vec![vec![default; width]; height];
-                self.height = height;
-                self.width = width;
-            }
-
-            pub fn add_row(&mut self, row: Vec<$type>) {
-                if self.width != 0 && row.len() != self.width {
-                    panic!("Invalid row length");
-                }
-                self.height += 1;
-                self.width = row.len();
-                self.matrix.push(row);
-            }
-
             pub fn set_element(&mut self, row: usize, column: usize, value: $type) {
                 if !self.is_in_bounds(row, column) {
                     panic!("Out of bounds");
                 }
 
-                match self.matrix.get_mut(row) {
-                    Some(row) => match row.get_mut(column) {
-                        Some(element) => *element = value,
-                        None => panic!("Out of bounds after indexing"),
-                    },
+                match self.matrix.get_mut((row, column)) {
+                    Some(element) => *element = value,
                     None => panic!("Out of bounds after indexing"),
                 }
             }
@@ -93,11 +70,8 @@ macro_rules! create_matrix {
                     panic!("Out of bounds");
                 }
 
-                match self.matrix.get(row) {
-                    Some(row) => match row.get(column) {
-                        Some(element) => *element,
-                        None => panic!("Out of bounds after indexing"),
-                    },
+                match self.matrix.get((row, column)) {
+                    Some(element) => *element,
                     None => panic!("Out of bounds after indexing"),
                 }
             }

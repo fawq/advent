@@ -2,12 +2,9 @@ mod graphs;
 mod matrixes;
 mod positions;
 mod utils;
-use crate::{
-    graphs::{
-        edge::Edge,
-        graph::{Graph, GraphType},
-    },
-    utils::file::read_lines,
+use crate::graphs::{
+    edge::Edge,
+    graph::{Graph, GraphType},
 };
 use crate::{
     matrixes::matrix::{
@@ -18,8 +15,17 @@ use crate::{
         position::{Direction, Position},
         vector::Vector,
     },
+    utils::file::{
+        read_lines_to_vec_f32, read_lines_to_vec_f64, read_lines_to_vec_i8, read_lines_to_vec_i16,
+        read_lines_to_vec_i32, read_lines_to_vec_i64, read_lines_to_vec_u8, read_lines_to_vec_u16,
+        read_lines_to_vec_u32, read_lines_to_vec_u64,
+    },
 };
-use pyo3::prelude::*;
+use pyo3::{
+    Bound, PyResult, pymodule,
+    types::{PyModule, PyModuleMethods},
+    wrap_pyfunction,
+};
 use pyo3_stub_gen::define_stub_info_gatherer;
 
 /// A Python module implemented in Rust. The name of this function must match
@@ -46,7 +52,17 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<F32Matrix>()?;
     m.add_class::<F64Matrix>()?;
 
-    m.add_function(wrap_pyfunction!(read_lines, m)?)?;
+    m.add_function(wrap_pyfunction!(read_lines_to_vec_i8, m)?)?;
+    m.add_function(wrap_pyfunction!(read_lines_to_vec_i16, m)?)?;
+    m.add_function(wrap_pyfunction!(read_lines_to_vec_i32, m)?)?;
+    m.add_function(wrap_pyfunction!(read_lines_to_vec_i64, m)?)?;
+    m.add_function(wrap_pyfunction!(read_lines_to_vec_u8, m)?)?;
+    m.add_function(wrap_pyfunction!(read_lines_to_vec_u16, m)?)?;
+    m.add_function(wrap_pyfunction!(read_lines_to_vec_u32, m)?)?;
+    m.add_function(wrap_pyfunction!(read_lines_to_vec_u64, m)?)?;
+    m.add_function(wrap_pyfunction!(read_lines_to_vec_f32, m)?)?;
+    m.add_function(wrap_pyfunction!(read_lines_to_vec_f64, m)?)?;
+
     Ok(())
 }
 

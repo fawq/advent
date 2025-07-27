@@ -1,6 +1,6 @@
 use crate::positions::vector::Vector;
-use pyo3::prelude::*;
-use pyo3_stub_gen::derive::*;
+use pyo3::{pyclass, pymethods};
+use pyo3_stub_gen::derive::{gen_stub_pyclass, gen_stub_pyclass_enum, gen_stub_pymethods};
 
 #[gen_stub_pyclass_enum]
 #[pyclass(eq, eq_int)]
