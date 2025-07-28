@@ -3,7 +3,7 @@ import numpy as np
 from algo import read_lines_to_vec_u32
 
 
-@nb.njit("uint32(uint32[:,:])", fastmath=True, parallel=True)
+@nb.njit("uint32(uint32[:,:])", fastmath=True, parallel=True, cache=True)
 def calculate_similarity_score(array_numbers: np.typing.NDArray[np.int32]) -> int:
     counts = np.array([np.sum(array_numbers[:, 1] == x) for x in array_numbers[:, 0]])
     similarity_score = array_numbers[:, 0] * counts

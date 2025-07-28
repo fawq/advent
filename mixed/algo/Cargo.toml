@@ -11,10 +11,10 @@ crate-type = ["cdylib", "rlib"]
 [dependencies]
 # "extension-module" tells pyo3 we want to build an extension module (skips linking against libpython.so)
 # "abi3-py39" tells pyo3 (and maturin) to build using the stable ABI with minimum Python version 3.9
-pyo3 = { version = "=0.25.1", features = ["extension-module", "abi3-py313"] }
-pyo3-stub-gen = {version ="=0.10.0", features = ["numpy"]}
-numpy = "=0.25"
-ndarray = "=0.16.1"
+pyo3.workspace = true
+pyo3-stub-gen.workspace = true
+numpy.workspace = true
+ndarray.workspace = true
 env_logger.workspace = true
 
 [[bin]]
