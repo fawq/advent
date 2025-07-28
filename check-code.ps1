@@ -3,7 +3,7 @@ uv sync
 
 # Rebuild mixed workspaces
 Get-ChildItem -Path mixed/ -Recurse -Depth 0 | Where-Object { $_.PSIsContainer } | ForEach-Object { 
-    cargo run --bin stub_gen 
+    cargo --config win_config/win_rust_config.toml run --bin stub_gen 
 }
 Get-ChildItem -Path mixed/ -Recurse -Depth 0 | Where-Object { $_.PSIsContainer } | ForEach-Object { 
     maturin develop --release --uv -m mixed/$_/Cargo.toml 
