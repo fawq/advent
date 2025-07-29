@@ -30,11 +30,11 @@ fn read_lines_to_array2d<T: std::str::FromStr + Clone>(file_path: &str) -> Array
     .unwrap()
 }
 
-fn read_lines_to_vec_of_array1d<T: std::str::FromStr + Clone>(file_path: &str) -> Vec<Array1<T>> {
-    let lines = read_lines(file_path);
-    let arrays: Vec<Array1<T>> = lines.iter().map(|line| read_array(line)).collect();
-    arrays
-}
+// fn read_lines_to_vec_of_array1d<T: std::str::FromStr + Clone>(file_path: &str) -> Vec<Array1<T>> {
+//     let lines = read_lines(file_path);
+//     let arrays: Vec<Array1<T>> = lines.iter().map(|line| read_array(line)).collect();
+//     arrays
+// }
 
 macro_rules! create_read_lines_to_array2d {
     ($name: ident, $type: ident) => {
