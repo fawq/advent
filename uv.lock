@@ -6,6 +6,7 @@ requires-python = ">=3.13"
 members = [
     "advent",
     "advent-2024-01",
+    "advent-2024-02",
     "algo",
 ]
 
@@ -42,6 +43,11 @@ dev = [
 name = "advent-2024-01"
 version = "0.1.0"
 source = { editable = "python/advent_2024_01" }
+
+[[package]]
+name = "advent-2024-02"
+version = "0.1.0"
+source = { editable = "python/advent_2024_02" }
 
 [[package]]
 name = "algo"

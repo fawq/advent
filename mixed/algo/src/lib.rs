@@ -16,9 +16,15 @@ use crate::{
         vector::Vector,
     },
     utils::file::{
-        read_lines_to_vec_f32, read_lines_to_vec_f64, read_lines_to_vec_i8, read_lines_to_vec_i16,
-        read_lines_to_vec_i32, read_lines_to_vec_i64, read_lines_to_vec_u8, read_lines_to_vec_u16,
-        read_lines_to_vec_u32, read_lines_to_vec_u64,
+        read_lines_to_array2d_f32, read_lines_to_array2d_f64, read_lines_to_array2d_i8,
+        read_lines_to_array2d_i16, read_lines_to_array2d_i32, read_lines_to_array2d_i64,
+        read_lines_to_array2d_u8, read_lines_to_array2d_u16, read_lines_to_array2d_u32,
+        read_lines_to_array2d_u64, read_lines_to_vec_of_array1d_f32,
+        read_lines_to_vec_of_array1d_f64, read_lines_to_vec_of_array1d_i8,
+        read_lines_to_vec_of_array1d_i16, read_lines_to_vec_of_array1d_i32,
+        read_lines_to_vec_of_array1d_i64, read_lines_to_vec_of_array1d_u8,
+        read_lines_to_vec_of_array1d_u16, read_lines_to_vec_of_array1d_u32,
+        read_lines_to_vec_of_array1d_u64,
     },
 };
 use pyo3::{
@@ -52,16 +58,27 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<F32Matrix>()?;
     m.add_class::<F64Matrix>()?;
 
-    m.add_function(wrap_pyfunction!(read_lines_to_vec_i8, m)?)?;
-    m.add_function(wrap_pyfunction!(read_lines_to_vec_i16, m)?)?;
-    m.add_function(wrap_pyfunction!(read_lines_to_vec_i32, m)?)?;
-    m.add_function(wrap_pyfunction!(read_lines_to_vec_i64, m)?)?;
-    m.add_function(wrap_pyfunction!(read_lines_to_vec_u8, m)?)?;
-    m.add_function(wrap_pyfunction!(read_lines_to_vec_u16, m)?)?;
-    m.add_function(wrap_pyfunction!(read_lines_to_vec_u32, m)?)?;
-    m.add_function(wrap_pyfunction!(read_lines_to_vec_u64, m)?)?;
-    m.add_function(wrap_pyfunction!(read_lines_to_vec_f32, m)?)?;
-    m.add_function(wrap_pyfunction!(read_lines_to_vec_f64, m)?)?;
+    m.add_function(wrap_pyfunction!(read_lines_to_array2d_i8, m)?)?;
+    m.add_function(wrap_pyfunction!(read_lines_to_array2d_i16, m)?)?;
+    m.add_function(wrap_pyfunction!(read_lines_to_array2d_i32, m)?)?;
+    m.add_function(wrap_pyfunction!(read_lines_to_array2d_i64, m)?)?;
+    m.add_function(wrap_pyfunction!(read_lines_to_array2d_u8, m)?)?;
+    m.add_function(wrap_pyfunction!(read_lines_to_array2d_u16, m)?)?;
+    m.add_function(wrap_pyfunction!(read_lines_to_array2d_u32, m)?)?;
+    m.add_function(wrap_pyfunction!(read_lines_to_array2d_u64, m)?)?;
+    m.add_function(wrap_pyfunction!(read_lines_to_array2d_f32, m)?)?;
+    m.add_function(wrap_pyfunction!(read_lines_to_array2d_f64, m)?)?;
+
+    m.add_function(wrap_pyfunction!(read_lines_to_vec_of_array1d_i8, m)?)?;
+    m.add_function(wrap_pyfunction!(read_lines_to_vec_of_array1d_i16, m)?)?;
+    m.add_function(wrap_pyfunction!(read_lines_to_vec_of_array1d_i32, m)?)?;
+    m.add_function(wrap_pyfunction!(read_lines_to_vec_of_array1d_i64, m)?)?;
+    m.add_function(wrap_pyfunction!(read_lines_to_vec_of_array1d_u8, m)?)?;
+    m.add_function(wrap_pyfunction!(read_lines_to_vec_of_array1d_u16, m)?)?;
+    m.add_function(wrap_pyfunction!(read_lines_to_vec_of_array1d_u32, m)?)?;
+    m.add_function(wrap_pyfunction!(read_lines_to_vec_of_array1d_u64, m)?)?;
+    m.add_function(wrap_pyfunction!(read_lines_to_vec_of_array1d_f32, m)?)?;
+    m.add_function(wrap_pyfunction!(read_lines_to_vec_of_array1d_f64, m)?)?;
 
     Ok(())
 }

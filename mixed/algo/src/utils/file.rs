@@ -1,4 +1,5 @@
 use numpy::IntoPyArray;
+use numpy::array::PyArray1;
 use numpy::array::PyArray2;
 use numpy::ndarray::{Array1, Array2, Axis, stack};
 use pyo3::{Bound, Python, pyfunction};
@@ -19,7 +20,7 @@ fn read_array<T: std::str::FromStr + Clone>(line: &str) -> Array1<T> {
         .collect()
 }
 
-fn read_lines_to_vec<T: std::str::FromStr + Clone>(file_path: &str) -> Array2<T> {
+fn read_lines_to_array2d<T: std::str::FromStr + Clone>(file_path: &str) -> Array2<T> {
     let lines = read_lines(file_path);
     let arrays: Vec<Array1<T>> = lines.iter().map(|line| read_array(line)).collect();
     stack(
@@ -29,23 +30,55 @@ fn read_lines_to_vec<T: std::str::FromStr + Clone>(file_path: &str) -> Array2<T>
     .unwrap()
 }
 
-macro_rules! create_read_lines_to_vec {
+fn read_lines_to_vec_of_array1d<T: std::str::FromStr + Clone>(file_path: &str) -> Vec<Array1<T>> {
+    let lines = read_lines(file_path);
+    let arrays: Vec<Array1<T>> = lines.iter().map(|line| read_array(line)).collect();
+    arrays
+}
+
+macro_rules! create_read_lines_to_array2d {
     ($name: ident, $type: ident) => {
         #[gen_stub_pyfunction]
         #[pyfunction]
         pub fn $name<'py>(py: Python<'py>, file_path: &str) -> Bound<'py, PyArray2<$type>> {
-            read_lines_to_vec::<$type>(file_path).into_pyarray(py)
+            read_lines_to_array2d::<$type>(file_path).into_pyarray(py)
         }
     };
 }
 
-create_read_lines_to_vec!(read_lines_to_vec_i8, i8);
-create_read_lines_to_vec!(read_lines_to_vec_i16, i16);
-create_read_lines_to_vec!(read_lines_to_vec_i32, i32);
-create_read_lines_to_vec!(read_lines_to_vec_i64, i64);
-create_read_lines_to_vec!(read_lines_to_vec_u8, u8);
-create_read_lines_to_vec!(read_lines_to_vec_u16, u16);
-create_read_lines_to_vec!(read_lines_to_vec_u32, u32);
-create_read_lines_to_vec!(read_lines_to_vec_u64, u64);
-create_read_lines_to_vec!(read_lines_to_vec_f32, f32);
-create_read_lines_to_vec!(read_lines_to_vec_f64, f64);
+macro_rules! create_read_lines_to_vec_of_array1d {
+    ($name: ident, $type: ident) => {
+        #[gen_stub_pyfunction]
+        #[pyfunction]
+        pub fn $name<'py>(py: Python<'py>, file_path: &str) -> Vec<Bound<'py, PyArray1<$type>>> {
+            let lines = read_lines(file_path);
+            let arrays = lines
+                .iter()
+                .map(|line| read_array(line).into_pyarray(py))
+                .collect();
+            arrays
+        }
+    };
+}
+
+create_read_lines_to_array2d!(read_lines_to_array2d_i8, i8);
+create_read_lines_to_array2d!(read_lines_to_array2d_i16, i16);
+create_read_lines_to_array2d!(read_lines_to_array2d_i32, i32);
+create_read_lines_to_array2d!(read_lines_to_array2d_i64, i64);
+create_read_lines_to_array2d!(read_lines_to_array2d_u8, u8);
+create_read_lines_to_array2d!(read_lines_to_array2d_u16, u16);
+create_read_lines_to_array2d!(read_lines_to_array2d_u32, u32);
+create_read_lines_to_array2d!(read_lines_to_array2d_u64, u64);
+create_read_lines_to_array2d!(read_lines_to_array2d_f32, f32);
+create_read_lines_to_array2d!(read_lines_to_array2d_f64, f64);
+
+create_read_lines_to_vec_of_array1d!(read_lines_to_vec_of_array1d_i8, i8);
+create_read_lines_to_vec_of_array1d!(read_lines_to_vec_of_array1d_i16, i16);
+create_read_lines_to_vec_of_array1d!(read_lines_to_vec_of_array1d_i32, i32);
+create_read_lines_to_vec_of_array1d!(read_lines_to_vec_of_array1d_i64, i64);
+create_read_lines_to_vec_of_array1d!(read_lines_to_vec_of_array1d_u8, u8);
+create_read_lines_to_vec_of_array1d!(read_lines_to_vec_of_array1d_u16, u16);
+create_read_lines_to_vec_of_array1d!(read_lines_to_vec_of_array1d_u32, u32);
+create_read_lines_to_vec_of_array1d!(read_lines_to_vec_of_array1d_u64, u64);
+create_read_lines_to_vec_of_array1d!(read_lines_to_vec_of_array1d_f32, f32);
+create_read_lines_to_vec_of_array1d!(read_lines_to_vec_of_array1d_f64, f64);
