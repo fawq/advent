@@ -5,8 +5,8 @@ from algo import read_lines_to_vec_of_array1d_i8
 
 @nb.njit(fastmath=True, parallel=True, cache=True)
 def is_safe(array_number: np.typing.NDArray[np.int8]) -> np.bool:
-    diff = np.diff(array_number)
-    return np.all((diff >= 1) & (diff <= 3)) or np.all((diff <= -1) & (diff >= -3))
+    diffs = np.diff(array_number)
+    return np.all((diffs >= 1) & (diffs <= 3)) or np.all((diffs <= -1) & (diffs >= -3))
 
 @nb.njit(fastmath=True, parallel=True, cache=True)
 def count_safe(array_numbers: list[np.typing.NDArray[np.int8]]) -> int:
@@ -16,7 +16,7 @@ def count_safe(array_numbers: list[np.typing.NDArray[np.int8]]) -> int:
             counter += 1
     return counter
 
-def day_01_main() -> int:
+def day_02_task_01_main() -> int:
     array_numbers = read_lines_to_vec_of_array1d_i8(
         "python/advent_2024_02/data/data.txt"
     )

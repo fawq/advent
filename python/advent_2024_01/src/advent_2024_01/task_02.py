@@ -10,6 +10,6 @@ def calculate_similarity_score(array_numbers: np.typing.NDArray[np.int32]) -> in
 
     return similarity_score.sum()
 
-def day_02_main() -> int:
+def day_01_task_02_main() -> int:
     array_numbers = read_lines_to_array2d_u32("python/advent_2024_01/data/data.txt")
     return calculate_similarity_score(array_numbers)
