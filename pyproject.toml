@@ -3,7 +3,7 @@ name = "advent"
 version = "0.1.0"
 description = "Advent code"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.12"
 authors = [{name = "Krystian Krakowski", email = "kkrakowski22@gmail.com"}]
 dependencies = [
     "numba==0.61.2",
@@ -15,9 +15,9 @@ members = ["python/*", "mixed/*"]
 
 [dependency-groups]
 dev = [
-    "mypy==1.16.1",
+    "mypy==1.17.0",
     "pytest==8.4.1",
-    "ruff==0.12.3",
+    "ruff==0.12.7",
 ]
 
 [tool.uv]
