@@ -51,11 +51,16 @@ def is_decreasing(array_number: np.typing.NDArray[np.int8], max_errors: int) -> 
     return True
 
 
+@nb.jit(fastmath=True, parallel=True, cache=True)
+def is_safe(array_number: np.typing.NDArray[np.int8]) -> np.bool:
+    return is_increasing(array_number, 1) or is_decreasing(array_number, 1)
+
+
 @nb.njit(fastmath=True, parallel=True, cache=True)
 def count_safe(array_numbers: list[np.typing.NDArray[np.int8]]) -> int:
     counter: int = 0
     for array_number in array_numbers:
-        if is_increasing(array_number, 1) or is_decreasing(array_number, 1):
+        if is_safe(array_number):
             counter += 1
     return counter
 
