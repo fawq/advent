@@ -1,9 +1,8 @@
-import numba as nb
 import numpy as np
 from algo import read_lines_to_vec_of_array1d_i8
 
 
-@nb.njit(fastmath=True, parallel=True, cache=True)
+# @nb.njit(fastmath=True, cache=True) Reason: issue with numba recursion
 def is_increasing(array_number: np.typing.NDArray[np.int8], max_errors: int) -> bool:
     diffs = np.diff(array_number)
     for index, diff in enumerate(diffs):
@@ -27,7 +26,7 @@ def is_increasing(array_number: np.typing.NDArray[np.int8], max_errors: int) -> 
     return True
 
 
-@nb.njit(fastmath=True, parallel=True, cache=True)
+# @nb.njit(fastmath=True, cache=True) Reason: issue with numba recursion
 def is_decreasing(array_number: np.typing.NDArray[np.int8], max_errors: int) -> bool:
     diffs = np.diff(array_number)
     for index, diff in enumerate(diffs):
@@ -51,12 +50,11 @@ def is_decreasing(array_number: np.typing.NDArray[np.int8], max_errors: int) -> 
     return True
 
 
-@nb.jit(fastmath=True, parallel=True, cache=True)
-def is_safe(array_number: np.typing.NDArray[np.int8]) -> np.bool:
+# @nb.jit(fastmath=True, cache=True)
+def is_safe(array_number: np.typing.NDArray[np.int8]) -> bool:
     return is_increasing(array_number, 1) or is_decreasing(array_number, 1)
 
 
-@nb.njit(fastmath=True, parallel=True, cache=True)
 def count_safe(array_numbers: list[np.typing.NDArray[np.int8]]) -> int:
     counter: int = 0
     for array_number in array_numbers:
