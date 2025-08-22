@@ -1,3 +1,3 @@
 # Advent of code
 
-New repository for advent of code solutions
+New repository for `Advent of code` solutions.
