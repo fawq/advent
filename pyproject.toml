@@ -6,8 +6,8 @@ readme = "README.md"
 requires-python = ">=3.12"
 authors = [{name = "Krystian Krakowski", email = "kkrakowski22@gmail.com"}]
 dependencies = [
-    "numba==0.61.2",
-    "numpy==2.2.6",
+    "numba==0.62.0",
+    "numpy==2.3.3",
 ]
 
 [tool.uv.workspace]
@@ -15,9 +15,9 @@ members = ["python/*", "mixed/*"]
 
 [dependency-groups]
 dev = [
-    "mypy==1.17.1",
-    "pytest==8.4.1",
-    "ruff==0.12.10",
+    "mypy==1.18.2",
+    "pytest==8.4.2",
+    "ruff==0.13.1",
 ]
 
 [tool.uv]
