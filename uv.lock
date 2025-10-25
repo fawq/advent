@@ -7,6 +7,7 @@ members = [
     "advent",
     "advent-2024-01",
     "advent-2024-02",
+    "advent-2024-03",
     "algo",
 ]
 
@@ -50,6 +51,11 @@ source = { editable = "python/advent_2024_01" }
 name = "advent-2024-02"
 version = "0.1.0"
 source = { editable = "python/advent_2024_02" }
+
+[[package]]
+name = "advent-2024-03"
+version = "0.1.0"
+source = { editable = "python/advent_2024_03" }
 
 [[package]]
 name = "algo"

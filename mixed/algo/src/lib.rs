@@ -19,7 +19,7 @@ use crate::{
         read_lines_to_array2d_f32, read_lines_to_array2d_f64, read_lines_to_array2d_i8,
         read_lines_to_array2d_i16, read_lines_to_array2d_i32, read_lines_to_array2d_i64,
         read_lines_to_array2d_u8, read_lines_to_array2d_u16, read_lines_to_array2d_u32,
-        read_lines_to_array2d_u64, read_lines_to_vec_of_array1d_f32,
+        read_lines_to_array2d_u64, read_lines_to_vec, read_lines_to_vec_of_array1d_f32,
         read_lines_to_vec_of_array1d_f64, read_lines_to_vec_of_array1d_i8,
         read_lines_to_vec_of_array1d_i16, read_lines_to_vec_of_array1d_i32,
         read_lines_to_vec_of_array1d_i64, read_lines_to_vec_of_array1d_u8,
@@ -79,6 +79,8 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(read_lines_to_vec_of_array1d_u64, m)?)?;
     m.add_function(wrap_pyfunction!(read_lines_to_vec_of_array1d_f32, m)?)?;
     m.add_function(wrap_pyfunction!(read_lines_to_vec_of_array1d_f64, m)?)?;
+
+    m.add_function(wrap_pyfunction!(read_lines_to_vec, m)?)?;
 
     Ok(())
 }
