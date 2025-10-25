@@ -6,9 +6,16 @@ readme = "README.md"
 requires-python = ">=3.12"
 authors = [{name = "Krystian Krakowski", email = "kkrakowski22@gmail.com"}]
 dependencies = [
-    "numba==0.62.0",
-    "numpy==2.3.3",
+    "numba==0.62.1",
+    "numpy==2.3.4",
     "algo",
+]
+
+[dependency-groups]
+dev = [
+    "mypy==1.18.2",
+    "pytest==8.4.2",
+    "ruff==0.14.2",
 ]
 
 [tool.uv.workspace]
@@ -17,12 +24,8 @@ members = ["python/*", "mixed/*"]
 [tool.uv.sources]
 algo = { workspace = true }
 
-[dependency-groups]
-dev = [
-    "mypy==1.18.2",
-    "pytest==8.4.2",
-    "ruff==0.13.1",
-]
+[tool.ruff]
+extend-exclude = ["**/*.pyi"]
 
 [tool.ruff.lint]
 select = ["ALL"]

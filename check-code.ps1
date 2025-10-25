@@ -19,5 +19,6 @@ cargo --config win_config/win_rust_config.toml clippy
 
 # Check python code (also mixed workspaces)
 uv run mypy .
+uv run stubtest algo --ignore-missing-stub --ignore-disjoint-bases
 uv run ruff check --fix
 uv run pytest

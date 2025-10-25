@@ -2,7 +2,7 @@ import numpy as np
 from algo._core import read_lines_to_vec_of_array1d_i8
 
 
-# @nb.njit(fastmath=True, cache=True) Reason: issue with numba recursion
+# @nb.njit(fastmath=True, parallel=True, cache=True)
 def is_increasing(array_number: np.typing.NDArray[np.int8], max_errors: int) -> bool:
     diffs = np.diff(array_number)
     for index, diff in enumerate(diffs):
@@ -26,7 +26,7 @@ def is_increasing(array_number: np.typing.NDArray[np.int8], max_errors: int) -> 
     return True
 
 
-# @nb.njit(fastmath=True, cache=True) Reason: issue with numba recursion
+# @nb.njit(fastmath=True, parallel=True, cache=True)
 def is_decreasing(array_number: np.typing.NDArray[np.int8], max_errors: int) -> bool:
     diffs = np.diff(array_number)
     for index, diff in enumerate(diffs):
@@ -50,7 +50,7 @@ def is_decreasing(array_number: np.typing.NDArray[np.int8], max_errors: int) -> 
     return True
 
 
-# @nb.jit(fastmath=True, cache=True)
+# @nb.njit(fastmath=True, parallel=True, cache=True)
 def is_safe(array_number: np.typing.NDArray[np.int8]) -> bool:
     return is_increasing(array_number, 1) or is_decreasing(array_number, 1)
 

@@ -3,10 +3,9 @@
 
 import builtins
 import enum
-import typing
-
 import numpy
 import numpy.typing
+import typing
 
 @typing.final
 class BoolMatrix:
