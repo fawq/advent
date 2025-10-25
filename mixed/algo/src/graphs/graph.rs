@@ -40,11 +40,11 @@ impl Graph {
         match self.graph_type {
             GraphType::OneDirectional => {
                 self.edges.insert(edge);
-            }
+            },
             GraphType::BiDirectional => {
                 self.edges.insert(edge);
                 self.edges.insert(edge.reverse());
-            }
+            },
         }
 
         self.nodes.insert(edge.from_node);
@@ -65,11 +65,11 @@ impl Graph {
         match self.graph_type {
             GraphType::OneDirectional => {
                 self.edges.remove(&edge);
-            }
+            },
             GraphType::BiDirectional => {
                 self.edges.remove(&edge);
                 self.edges.remove(&edge.reverse());
-            }
+            },
         }
     }
 
