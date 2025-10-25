@@ -15,6 +15,7 @@ name = "advent"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "algo" },
     { name = "numba" },
     { name = "numpy" },
 ]
@@ -28,6 +29,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "algo", editable = "mixed/algo" },
     { name = "numba", specifier = "==0.62.0" },
     { name = "numpy", specifier = "==2.3.3" },
 ]

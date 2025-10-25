@@ -14,6 +14,7 @@ algo = "algo:main"
 
 [tool.maturin]
 module-name = "algo._core"
+profile = "release"
 python-packages = ["algo"]
 python-source = "python"
 features = ["pyo3/extension-module"]
@@ -21,3 +22,6 @@ features = ["pyo3/extension-module"]
 [build-system]
 requires = ["maturin>=1.0,<2.0"]
 build-backend = "maturin"
+
+[tool.uv]
+cache-keys = [{file = "pyproject.toml"}, {file = "Cargo.toml"}, {file = "**/*.rs"}]

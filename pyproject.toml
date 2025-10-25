@@ -8,10 +8,14 @@ authors = [{name = "Krystian Krakowski", email = "kkrakowski22@gmail.com"}]
 dependencies = [
     "numba==0.62.0",
     "numpy==2.3.3",
+    "algo",
 ]
 
 [tool.uv.workspace]
 members = ["python/*", "mixed/*"]
+
+[tool.uv.sources]
+algo = { workspace = true }
 
 [dependency-groups]
 dev = [
@@ -19,9 +23,6 @@ dev = [
     "pytest==8.4.2",
     "ruff==0.13.1",
 ]
-
-[tool.uv]
-cache-keys = [{file = "pyproject.toml"}, {file = "mixed/*/Cargo.toml"}, {file = "**/*.rs"}]
 
 [tool.ruff.lint]
 select = ["ALL"]

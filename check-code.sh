@@ -2,12 +2,14 @@
 
 set -xe
 
+# Rebuild mixed workspaces
+find mixed/ -maxdepth 1 -mindepth 1 -type d -exec cargo run --bin stub_gen \;
+
 # Sync uv if any changes
 uv sync
 
-# Rebuild mixed workspaces
-find mixed/ -maxdepth 1 -mindepth 1 -type d -exec cargo run --bin stub_gen \;
-find mixed/ -maxdepth 1 -mindepth 1 -type d -exec maturin develop --release --uv -m {}/Cargo.toml \;
+# Rebuild mixed workspaces (not needed for now)
+#find mixed/ -maxdepth 1 -mindepth 1 -type d -exec maturin develop --release --uv -m {}/Cargo.toml \;
 
 # Check all rust code (also mixed workspaces)
 cargo check

@@ -11,8 +11,8 @@ readme = "README.md"
 rust-version = "1.88"
 
 [workspace.dependencies]
-pyo3 = { version = "=0.26.0", features = ["extension-module", "abi3-py312"] }
-pyo3-stub-gen = {version ="=0.13.1", features = ["numpy"]}
-numpy = "=0.26"
+pyo3 = { version = "=0.27.1", features = ["extension-module", "abi3-py312"] }
+pyo3-stub-gen = {version ="=0.16.1", features = ["numpy"]}
+numpy = "=0.27"
 ndarray = "=0.16.1"
 env_logger = "=0.11.8"

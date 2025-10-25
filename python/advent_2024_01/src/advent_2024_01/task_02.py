@@ -1,6 +1,6 @@
 import numba as nb
 import numpy as np
-from algo import read_lines_to_array2d_u32
+from algo._core import read_lines_to_array2d_u32
 
 
 @nb.njit(fastmath=True, parallel=True, cache=True)
