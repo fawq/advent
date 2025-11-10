@@ -8,10 +8,11 @@ $env:PYO3_PYTHON = "$projectRoot\.venv\Scripts\python.exe"
 function Run($Description, $ScriptBlock) {
     Write-Host "[ RUN ] $Description... " -NoNewline
 
-    # Run command and capture both stdout and stderr
-    $output = & $ScriptBlock 2>&1
+    # Capture ALL output without triggering PowerShell errors
+    $output = & $ScriptBlock 2>&1 | Out-String
+    $exitCode = $LASTEXITCODE  # Always use this for native commands
 
-    if ($LASTEXITCODE -eq 0) {
+    if ($exitCode -eq 0) {
         Write-Host "OK"
     }
     else {
@@ -20,7 +21,7 @@ function Run($Description, $ScriptBlock) {
         Write-Host "----- Command Output -----"
         Write-Host $output
         Write-Host "--------------------------"
-        exit 1
+        exit $exitCode
     }
 }
 
