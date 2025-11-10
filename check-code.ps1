@@ -61,4 +61,4 @@ Run "stubtest" { uv run stubtest algo --ignore-missing-stub --ignore-disjoint-ba
 Run "ruff" { uv run ruff check --fix }
 Run "pytest" { uv run pytest }
 
-Write-Host "`\nAll tasks completed successfully."
+Write-Host "`nAll tasks completed successfully."
