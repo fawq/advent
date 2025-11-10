@@ -1,6 +1,6 @@
 import re
 
-import numpy as np
+import numpy as np2
 
 
 def sum_of_muls(path: str, mul_pattern_regexp: re.Pattern) -> int:
