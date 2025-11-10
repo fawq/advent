@@ -2,7 +2,6 @@
 $ErrorActionPreference = "Stop"
 
 [Console]::OutputEncoding = [System.Text.UTF8Encoding]::UTF8
-$PSStyle.OutputRendering = 'Ansi'
 
 $projectRoot = Get-Location
 $env:PYO3_PYTHON = "$projectRoot\.venv\Scripts\python.exe"
