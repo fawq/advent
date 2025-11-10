@@ -1,19 +1,22 @@
 #!/usr/bin/env pwsh
 $ErrorActionPreference = "Stop"
 
+[Console]::OutputEncoding = [System.Text.UTF8Encoding]::UTF8
+$PSStyle.OutputRendering = 'Ansi'
+
 $projectRoot = Get-Location
 $env:PYO3_PYTHON = "$projectRoot\.venv\Scripts\python.exe"
 
 
-function Run($Description, $Command) {
+function Run($Description, $ScriptBlock) {
     Write-Host "[ RUN ] $Description... " -NoNewline
     try {
-        & $Command | Out-Null
+        & $ScriptBlock *> $null
         Write-Host "OK"
     }
     catch {
         Write-Host "FAILED"
-        Write-Host "  ↳ Command: $Command"
+        Write-Host "  ↳ Step: $Description"
         exit 1
     }
 }
