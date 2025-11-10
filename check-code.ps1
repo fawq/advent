@@ -8,9 +8,16 @@ $env:PYO3_PYTHON = "$projectRoot\.venv\Scripts\python.exe"
 function Run($Description, $ScriptBlock) {
     Write-Host "[ RUN ] $Description... " -NoNewline
 
-    # Capture ALL output without triggering PowerShell errors
+    # Temporarily disable PowerShell error trapping for native stderr output
+    $oldErrPref = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
+
+    # Execute and capture output
     $output = & $ScriptBlock 2>&1 | Out-String
-    $exitCode = $LASTEXITCODE  # Always use this for native commands
+    $exitCode = $LASTEXITCODE
+
+    # Restore original error preference
+    $ErrorActionPreference = $oldErrPref
 
     if ($exitCode -eq 0) {
         Write-Host "OK"
