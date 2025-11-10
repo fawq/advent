@@ -2,7 +2,7 @@ mod graphs;
 mod matrixes;
 mod positions;
 mod utils;
-use crate::graphss::{
+use crate::graphs::{
     edge::Edge,
     graph::{Graph, GraphType},
 };
