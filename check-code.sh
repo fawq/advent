@@ -1,24 +1,42 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-set -xe
+# Helper function for running commands with status messages
+run() {
+    local description="$1"
+    shift
+    echo -n "[ RUN ] $description... "
+    if "$@" >/dev/null 2>&1; then
+        echo "OK"
+    else
+        echo "FAILED"
+        echo "  ↳ Command: $*"
+        exit 1
+    fi
+}
 
-# Rebuild mixed workspaces
-find mixed/ -maxdepth 1 -mindepth 1 -type d -exec cargo run --bin stub_gen \;
+echo "=== Rebuild mixed workspaces ==="
+run "Generating stubs for mixed workspaces" \
+    find mixed/ -maxdepth 1 -mindepth 1 -type d -exec cargo run --bin stub_gen \;
 
-# Sync uv if any changes
-uv sync
+echo "=== Syncing Python environment ==="
+run "Running uv sync" uv sync
 
-# Rebuild mixed workspaces (not needed for now)
-#find mixed/ -maxdepth 1 -mindepth 1 -type d -exec maturin develop --release --uv -m {}/Cargo.toml \;
+# If needed later:
+# run "Rebuilding mixed with maturin" \
+#     find mixed/ -maxdepth 1 -mindepth 1 -type d -exec maturin develop --release --uv -m {}/Cargo.toml \;
 
-# Check all rust code (also mixed workspaces)
-cargo check
-cargo fmt
-cargo test
-cargo clippy
+echo "=== Rust checks ==="
+run "cargo check" cargo check
+run "cargo fmt" cargo fmt --check
+run "cargo test" cargo test
+run "cargo clippy" cargo clippy --all-targets --all-features -- -D warnings
 
-# Check python code (also mixed workspaces)
-uv run mypy .
-uv run stubtest algo --ignore-missing-stub --ignore-disjoint-bases
-uv run ruff check --fix
-uv run pytest
+echo "=== Python checks ==="
+run "mypy" uv run mypy .
+run "stubtest" uv run stubtest algo --ignore-missing-stub --ignore-disjoint-bases
+run "ruff" uv run ruff check --fix
+run "pytest" uv run pytest
+
+echo
+echo "✅ All tasks completed successfully."
