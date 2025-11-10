@@ -1,21 +1,25 @@
 #!/usr/bin/env pwsh
 $ErrorActionPreference = "Stop"
-
 [Console]::OutputEncoding = [System.Text.UTF8Encoding]::UTF8
 
 $projectRoot = Get-Location
 $env:PYO3_PYTHON = "$projectRoot\.venv\Scripts\python.exe"
 
-
 function Run($Description, $ScriptBlock) {
     Write-Host "[ RUN ] $Description... " -NoNewline
-    try {
-        & $ScriptBlock *> $null
+
+    # Run command and capture both stdout and stderr
+    $output = & $ScriptBlock 2>&1
+
+    if ($LASTEXITCODE -eq 0) {
         Write-Host "OK"
     }
-    catch {
+    else {
         Write-Host "FAILED"
         Write-Host "  ↳ Step: $Description"
+        Write-Host "----- Command Output -----"
+        Write-Host $output
+        Write-Host "--------------------------"
         exit 1
     }
 }
@@ -49,4 +53,4 @@ Run "stubtest" { uv run stubtest algo --ignore-missing-stub --ignore-disjoint-ba
 Run "ruff" { uv run ruff check --fix }
 Run "pytest" { uv run pytest }
 
-Write-Host "`n✅ All tasks completed successfully."
+Write-Host "`\nAll tasks completed successfully."

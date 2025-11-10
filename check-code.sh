@@ -39,4 +39,4 @@ run "ruff" uv run ruff check --fix
 run "pytest" uv run pytest
 
 echo
-echo "✅ All tasks completed successfully."
+echo "All tasks completed successfully."
