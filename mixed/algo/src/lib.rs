@@ -38,7 +38,7 @@ use pyo3_stub_gen::define_stub_info_gatherer;
 /// the `lib.name` setting in the `Cargo.toml`, else Python will not be able to
 /// import the module.
 #[pymodule]
-fn main_mod(m: &Bound<PyModule>) -> PyResult<()> {
+fn _core(m: &Bound<PyModule>) -> PyResult<()> {
     graphs_mod(m)?;
     matrixes_mod(m)?;
     positions_mod(m)?;

@@ -2,7 +2,7 @@ use pyo3::{pyclass, pymethods};
 use pyo3_stub_gen::derive::{gen_stub_pyclass, gen_stub_pymethods};
 
 #[gen_stub_pyclass]
-#[pyclass(module = "algo.main_mod.positions")]
+#[pyclass(module = "algo._core.positions")]
 #[derive(Hash, Eq, PartialEq, Debug, Clone, Copy)]
 pub struct Vector {
     pub add_row: isize,

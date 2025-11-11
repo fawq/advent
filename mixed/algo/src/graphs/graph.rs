@@ -4,7 +4,7 @@ use pyo3_stub_gen::derive::{gen_stub_pyclass, gen_stub_pyclass_enum, gen_stub_py
 use std::collections::HashSet;
 
 #[gen_stub_pyclass_enum]
-#[pyclass(eq, eq_int, module = "algo.main_mod.graphs")]
+#[pyclass(eq, eq_int, module = "algo._core.graphs")]
 #[derive(Eq, PartialEq, Debug, Clone, Copy)]
 pub enum GraphType {
     OneDirectional,
@@ -12,7 +12,7 @@ pub enum GraphType {
 }
 
 #[gen_stub_pyclass]
-#[pyclass(module = "algo.main_mod.graphs")]
+#[pyclass(module = "algo._core.graphs")]
 #[derive(Eq, PartialEq, Debug)]
 pub struct Graph {
     nodes: HashSet<usize>,

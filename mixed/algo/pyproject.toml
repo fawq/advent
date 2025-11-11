@@ -13,7 +13,7 @@ dependencies = []
 algo = "algo:main"
 
 [tool.maturin]
-module-name = "algo.main_mod"
+module-name = "algo._core"
 profile = "release"
 python-source = "python"
 features = ["pyo3/extension-module"]

@@ -1,6 +1,6 @@
 import numba as nb
 import numpy as np
-from algo import main_mod
+from algo._core import utils
 
 
 @nb.njit(fastmath=True, parallel=True, cache=True)
@@ -12,7 +12,7 @@ def calculate_similarity_score(array_numbers: np.typing.NDArray[np.int32]) -> in
 
 
 def day_01_task_02_main() -> int:
-    array_numbers = main_mod.utils.read_lines_to_array2d_u32(
+    array_numbers = utils.read_lines_to_array2d_u32(
         "python/advent_2024_01/data/data.txt"
     )
     return calculate_similarity_score(array_numbers)

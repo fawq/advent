@@ -3,7 +3,7 @@
 
 import builtins
 import typing
-from algo.main_mod.positions import Position
+from algo._core.positions import Position
 
 @typing.final
 class BoolMatrix:

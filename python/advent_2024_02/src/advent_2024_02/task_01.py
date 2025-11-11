@@ -1,6 +1,6 @@
 import numba as nb
 import numpy as np
-from algo import main_mod
+from algo._core import utils
 
 
 @nb.njit(fastmath=True, parallel=True, cache=True)
@@ -18,7 +18,7 @@ def count_safe(array_numbers: list[np.typing.NDArray[np.int8]]) -> int:
 
 
 def day_02_task_01_main() -> int:
-    array_numbers = main_mod.utils.read_lines_to_vec_of_array1d_i8(
+    array_numbers = utils.read_lines_to_vec_of_array1d_i8(
         "python/advent_2024_02/data/data.txt"
     )
     return count_safe(array_numbers)
