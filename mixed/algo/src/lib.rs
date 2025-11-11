@@ -38,50 +38,83 @@ use pyo3_stub_gen::define_stub_info_gatherer;
 /// the `lib.name` setting in the `Cargo.toml`, else Python will not be able to
 /// import the module.
 #[pymodule]
-fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
-    m.add_class::<Edge>()?;
-    m.add_class::<GraphType>()?;
-    m.add_class::<Graph>()?;
-    m.add_class::<Vector>()?;
-    m.add_class::<Position>()?;
-    m.add_class::<Direction>()?;
-    m.add_class::<BoolMatrix>()?;
-    m.add_class::<CharMatrix>()?;
-    m.add_class::<I8Matrix>()?;
-    m.add_class::<I16Matrix>()?;
-    m.add_class::<I32Matrix>()?;
-    m.add_class::<I64Matrix>()?;
-    m.add_class::<U8Matrix>()?;
-    m.add_class::<U16Matrix>()?;
-    m.add_class::<U32Matrix>()?;
-    m.add_class::<U64Matrix>()?;
-    m.add_class::<F32Matrix>()?;
-    m.add_class::<F64Matrix>()?;
+fn main_mod(m: &Bound<PyModule>) -> PyResult<()> {
+    graphs_mod(m)?;
+    matrixes_mod(m)?;
+    positions_mod(m)?;
+    utils_mod(m)?;
 
-    m.add_function(wrap_pyfunction!(read_lines_to_array2d_i8, m)?)?;
-    m.add_function(wrap_pyfunction!(read_lines_to_array2d_i16, m)?)?;
-    m.add_function(wrap_pyfunction!(read_lines_to_array2d_i32, m)?)?;
-    m.add_function(wrap_pyfunction!(read_lines_to_array2d_i64, m)?)?;
-    m.add_function(wrap_pyfunction!(read_lines_to_array2d_u8, m)?)?;
-    m.add_function(wrap_pyfunction!(read_lines_to_array2d_u16, m)?)?;
-    m.add_function(wrap_pyfunction!(read_lines_to_array2d_u32, m)?)?;
-    m.add_function(wrap_pyfunction!(read_lines_to_array2d_u64, m)?)?;
-    m.add_function(wrap_pyfunction!(read_lines_to_array2d_f32, m)?)?;
-    m.add_function(wrap_pyfunction!(read_lines_to_array2d_f64, m)?)?;
+    Ok(())
+}
 
-    m.add_function(wrap_pyfunction!(read_lines_to_vec_of_array1d_i8, m)?)?;
-    m.add_function(wrap_pyfunction!(read_lines_to_vec_of_array1d_i16, m)?)?;
-    m.add_function(wrap_pyfunction!(read_lines_to_vec_of_array1d_i32, m)?)?;
-    m.add_function(wrap_pyfunction!(read_lines_to_vec_of_array1d_i64, m)?)?;
-    m.add_function(wrap_pyfunction!(read_lines_to_vec_of_array1d_u8, m)?)?;
-    m.add_function(wrap_pyfunction!(read_lines_to_vec_of_array1d_u16, m)?)?;
-    m.add_function(wrap_pyfunction!(read_lines_to_vec_of_array1d_u32, m)?)?;
-    m.add_function(wrap_pyfunction!(read_lines_to_vec_of_array1d_u64, m)?)?;
-    m.add_function(wrap_pyfunction!(read_lines_to_vec_of_array1d_f32, m)?)?;
-    m.add_function(wrap_pyfunction!(read_lines_to_vec_of_array1d_f64, m)?)?;
+fn graphs_mod(parent: &Bound<PyModule>) -> PyResult<()> {
+    let graphs = PyModule::new(parent.py(), "graphs")?;
 
-    m.add_function(wrap_pyfunction!(read_lines_to_vec, m)?)?;
+    graphs.add_class::<Edge>()?;
+    graphs.add_class::<GraphType>()?;
+    graphs.add_class::<Graph>()?;
 
+    parent.add_submodule(&graphs)?;
+    Ok(())
+}
+
+fn matrixes_mod(parent: &Bound<PyModule>) -> PyResult<()> {
+    let matrixes = PyModule::new(parent.py(), "matrixes")?;
+
+    matrixes.add_class::<BoolMatrix>()?;
+    matrixes.add_class::<CharMatrix>()?;
+    matrixes.add_class::<I8Matrix>()?;
+    matrixes.add_class::<I16Matrix>()?;
+    matrixes.add_class::<I32Matrix>()?;
+    matrixes.add_class::<I64Matrix>()?;
+    matrixes.add_class::<U8Matrix>()?;
+    matrixes.add_class::<U16Matrix>()?;
+    matrixes.add_class::<U32Matrix>()?;
+    matrixes.add_class::<U64Matrix>()?;
+    matrixes.add_class::<F32Matrix>()?;
+    matrixes.add_class::<F64Matrix>()?;
+
+    parent.add_submodule(&matrixes)?;
+    Ok(())
+}
+
+fn positions_mod(parent: &Bound<PyModule>) -> PyResult<()> {
+    let positions = PyModule::new(parent.py(), "positions")?;
+
+    positions.add_class::<Position>()?;
+    positions.add_class::<Direction>()?;
+    positions.add_class::<Vector>()?;
+
+    parent.add_submodule(&positions)?;
+    Ok(())
+}
+
+fn utils_mod(parent: &Bound<PyModule>) -> PyResult<()> {
+    let utils = PyModule::new(parent.py(), "utils")?;
+
+    utils.add_function(wrap_pyfunction!(read_lines_to_array2d_i8, &utils)?)?;
+    utils.add_function(wrap_pyfunction!(read_lines_to_array2d_i16, &utils)?)?;
+    utils.add_function(wrap_pyfunction!(read_lines_to_array2d_i32, &utils)?)?;
+    utils.add_function(wrap_pyfunction!(read_lines_to_array2d_i64, &utils)?)?;
+    utils.add_function(wrap_pyfunction!(read_lines_to_array2d_u8, &utils)?)?;
+    utils.add_function(wrap_pyfunction!(read_lines_to_array2d_u16, &utils)?)?;
+    utils.add_function(wrap_pyfunction!(read_lines_to_array2d_u32, &utils)?)?;
+    utils.add_function(wrap_pyfunction!(read_lines_to_array2d_u64, &utils)?)?;
+    utils.add_function(wrap_pyfunction!(read_lines_to_array2d_f32, &utils)?)?;
+    utils.add_function(wrap_pyfunction!(read_lines_to_array2d_f64, &utils)?)?;
+    utils.add_function(wrap_pyfunction!(read_lines_to_vec_of_array1d_i8, &utils)?)?;
+    utils.add_function(wrap_pyfunction!(read_lines_to_vec_of_array1d_i16, &utils)?)?;
+    utils.add_function(wrap_pyfunction!(read_lines_to_vec_of_array1d_i32, &utils)?)?;
+    utils.add_function(wrap_pyfunction!(read_lines_to_vec_of_array1d_i64, &utils)?)?;
+    utils.add_function(wrap_pyfunction!(read_lines_to_vec_of_array1d_u8, &utils)?)?;
+    utils.add_function(wrap_pyfunction!(read_lines_to_vec_of_array1d_u16, &utils)?)?;
+    utils.add_function(wrap_pyfunction!(read_lines_to_vec_of_array1d_u32, &utils)?)?;
+    utils.add_function(wrap_pyfunction!(read_lines_to_vec_of_array1d_u64, &utils)?)?;
+    utils.add_function(wrap_pyfunction!(read_lines_to_vec_of_array1d_f32, &utils)?)?;
+    utils.add_function(wrap_pyfunction!(read_lines_to_vec_of_array1d_f64, &utils)?)?;
+    utils.add_function(wrap_pyfunction!(read_lines_to_vec, &utils)?)?;
+
+    parent.add_submodule(&utils)?;
     Ok(())
 }
 

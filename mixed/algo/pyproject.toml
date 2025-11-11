@@ -13,11 +13,13 @@ dependencies = []
 algo = "algo:main"
 
 [tool.maturin]
-module-name = "algo._core"
+module-name = "algo.main_mod"
 profile = "release"
-python-packages = ["algo"]
 python-source = "python"
 features = ["pyo3/extension-module"]
+
+[tool.pyo3-stub-gen]
+module = "empty_super_module"
 
 [build-system]
 requires = ["maturin>=1.0,<2.0"]
