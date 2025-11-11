@@ -33,8 +33,8 @@ run "cargo test" cargo test
 run "cargo clippy" cargo clippy --all-targets --all-features -- -D warnings
 
 echo "=== Python checks ==="
-run "mypy" uv run mypy .
 run "stubtest" uv run stubtest algo --ignore-missing-stub --ignore-disjoint-bases
+run "mypy" uv run mypy .
 run "ruff" uv run ruff check --fix
 run "pytest" uv run pytest
 

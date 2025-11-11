@@ -7,7 +7,7 @@ use numpy::ndarray::Array2;
 macro_rules! create_matrix {
     ($name: ident, $type: ident) => {
         #[gen_stub_pyclass]
-        #[pyclass]
+        #[pyclass(module = "algo.main_mod.matrixes")]
         pub struct $name {
             matrix: Array2<$type>,
             height: usize,

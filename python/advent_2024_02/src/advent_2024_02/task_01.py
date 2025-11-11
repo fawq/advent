@@ -1,6 +1,6 @@
 import numba as nb
 import numpy as np
-from algo.main_mod import read_lines_to_vec_of_array1d_i8
+from algo.main_mod.utils import read_lines_to_vec_of_array1d_i8
 
 
 @nb.njit(fastmath=True, parallel=True, cache=True)

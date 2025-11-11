@@ -56,8 +56,8 @@ Run "cargo test" { cargo test }
 Run "cargo clippy" { cargo clippy --all-targets --all-features -- -D warnings }
 
 Write-Host "=== Python checks ==="
-Run "mypy" { uv run mypy . }
 Run "stubtest" { uv run stubtest algo --ignore-missing-stub --ignore-disjoint-bases }
+Run "mypy" { uv run mypy . }
 Run "ruff" { uv run ruff check --fix }
 Run "pytest" { uv run pytest }
 

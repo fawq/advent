@@ -30,7 +30,7 @@ fn read_lines_to_array2d<T: std::str::FromStr + Clone>(file_path: &str) -> Array
     .unwrap()
 }
 
-#[gen_stub_pyfunction]
+#[gen_stub_pyfunction(module = "algo.main_mod.utils")]
 #[pyfunction]
 pub fn read_lines_to_vec(file_path: &str) -> Vec<String> {
     read_lines(file_path).to_vec()
@@ -38,7 +38,7 @@ pub fn read_lines_to_vec(file_path: &str) -> Vec<String> {
 
 macro_rules! create_read_lines_to_array2d {
     ($name: ident, $type: ident) => {
-        #[gen_stub_pyfunction]
+        #[gen_stub_pyfunction(module = "algo.main_mod.utils")]
         #[pyfunction]
         pub fn $name<'py>(py: Python<'py>, file_path: &str) -> Bound<'py, PyArray2<$type>> {
             read_lines_to_array2d::<$type>(file_path).into_pyarray(py)
@@ -48,7 +48,7 @@ macro_rules! create_read_lines_to_array2d {
 
 macro_rules! create_read_lines_to_vec_of_array1d {
     ($name: ident, $type: ident) => {
-        #[gen_stub_pyfunction]
+        #[gen_stub_pyfunction(module = "algo.main_mod.utils")]
         #[pyfunction]
         pub fn $name<'py>(py: Python<'py>, file_path: &str) -> Vec<Bound<'py, PyArray1<$type>>> {
             let lines = read_lines(file_path);

@@ -16,10 +16,8 @@ algo = "algo:main"
 module-name = "algo.main_mod"
 profile = "release"
 python-source = "python"
+python-packages = ["algo"]
 features = ["pyo3/extension-module"]
-
-[tool.pyo3-stub-gen]
-module = "empty_super_module"
 
 [build-system]
 requires = ["maturin>=1.0,<2.0"]

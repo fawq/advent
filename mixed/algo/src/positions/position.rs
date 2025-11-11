@@ -3,7 +3,7 @@ use pyo3::{pyclass, pymethods};
 use pyo3_stub_gen::derive::{gen_stub_pyclass, gen_stub_pyclass_enum, gen_stub_pymethods};
 
 #[gen_stub_pyclass_enum]
-#[pyclass(eq, eq_int)]
+#[pyclass(eq, eq_int, module = "algo.main_mod.positions")]
 #[derive(Hash, Eq, PartialEq, Debug, Clone, Copy)]
 pub enum Direction {
     Up,
@@ -24,7 +24,7 @@ impl From<Direction> for Vector {
 }
 
 #[gen_stub_pyclass]
-#[pyclass]
+#[pyclass(module = "algo.main_mod.positions")]
 #[derive(Hash, Eq, PartialEq, Debug, Clone, Copy)]
 pub struct Position {
     pub row: usize,
