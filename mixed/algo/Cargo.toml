@@ -4,7 +4,6 @@ version.workspace = true
 edition.workspace = true
 
 [lib]
-name = "main_mod"
 # "cdylib" is necessary to produce a shared library for Python to import from.
 # "rlib" is necessary for static linking
 crate-type = ["cdylib", "rlib"]

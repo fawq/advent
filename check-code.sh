@@ -33,7 +33,7 @@ run "cargo test" cargo test
 run "cargo clippy" cargo clippy --all-targets --all-features -- -D warnings
 
 echo "=== Python checks ==="
-run "stubtest" uv run stubtest algo --ignore-missing-stub --ignore-disjoint-bases
+# run "stubtest" uv run stubtest algo --ignore-missing-stub --ignore-disjoint-bases # Reason: https://github.com/Jij-Inc/pyo3-stub-gen?tab=readme-ov-file#known-limitation-nested-submodules
 run "mypy" uv run mypy .
 run "ruff" uv run ruff check --fix
 run "pytest" uv run pytest

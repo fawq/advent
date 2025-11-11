@@ -56,7 +56,7 @@ Run "cargo test" { cargo test }
 Run "cargo clippy" { cargo clippy --all-targets --all-features -- -D warnings }
 
 Write-Host "=== Python checks ==="
-Run "stubtest" { uv run stubtest algo --ignore-missing-stub --ignore-disjoint-bases }
+# Run "stubtest" { uv run stubtest algo --ignore-missing-stub --ignore-disjoint-bases } # Reason: https://github.com/Jij-Inc/pyo3-stub-gen?tab=readme-ov-file#known-limitation-nested-submodules
 Run "mypy" { uv run mypy . }
 Run "ruff" { uv run ruff check --fix }
 Run "pytest" { uv run pytest }

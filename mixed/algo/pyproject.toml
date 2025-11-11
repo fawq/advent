@@ -16,7 +16,6 @@ algo = "algo:main"
 module-name = "algo.main_mod"
 profile = "release"
 python-source = "python"
-python-packages = ["algo"]
 features = ["pyo3/extension-module"]
 
 [build-system]
