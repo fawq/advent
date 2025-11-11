@@ -1,0 +1,44 @@
+version: "3"
+
+env:
+  PYO3_PYTHON: '{{if eq OS "windows"}}.venv\\Scripts\\python.exe{{else}}.venv/bin/python{{end}}'
+
+tasks:
+  default:
+    desc: Rebuild mixed workspaces and run all checks
+    deps:
+      - generate-stubs
+      - sync-env
+      - rust-checks
+      - python-checks
+
+  generate-stubs:
+    desc: Generate stubs for mixed workspaces
+    dir: mixed/algo
+    cmds:
+      - cargo run --bin stub_gen
+
+  sync-env:
+    desc: Sync Python environment using uv
+    cmds:
+      - uv sync
+
+  rust-checks:
+    desc: Run Rust checks
+    cmds:
+      - cargo check
+      - cargo fmt --check
+      - cargo test
+      - cargo clippy --all-targets --all-features -- -D warnings
+
+  python-checks:
+    desc: Run Python type and lint checks
+    cmds:
+      - uv run mypy .
+      - uv run ruff check --fix
+      - uv run pytest
+
+  python-reinstall:
+    desc: Reinstall Python dependencies
+    cmds:
+      - uv sync --reinstall

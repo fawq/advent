@@ -210,3 +210,6 @@ Cargo.lock
 # End of https://www.toptal.com/developers/gitignore/api/python,rust,visualstudiocode
 
 **/data/**
+
+### Taskfile cache ###
+.task/
