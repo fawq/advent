@@ -59,6 +59,7 @@ tasks:
     desc: Run Python type and lint checks
     sources:
       - pyproject.toml
+      - mixed/**
       - python/**
     cmds:
       - uv run mypy .  # TODO: add quiet flag when supported
