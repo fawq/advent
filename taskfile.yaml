@@ -26,6 +26,11 @@ tasks:
   generate-stubs:
     desc: Generate stubs for mixed workspaces
     dir: mixed/algo
+    sources:
+      - src/**
+      - Cargo.toml
+    generates:
+      - python/algo/**
     cmds:
       - cargo run --bin stub_gen {{if .QUIET}}--quiet{{end}}
 
