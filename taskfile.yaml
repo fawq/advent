@@ -36,11 +36,19 @@ tasks:
 
   sync-env:
     desc: Sync Python environment using uv
+    sources:
+      - Cargo.toml
+      - pyproject.toml
+      - mixed/**
+      - python/**
     cmds:
       - uv sync {{if .QUIET}}--quiet{{end}}
 
   rust-checks:
     desc: Run Rust checks
+    sources:
+      - Cargo.toml
+      - mixed/**
     cmds:
       - cargo check {{if .QUIET}}--quiet{{end}}
       - cargo fmt --check {{if .QUIET}}--quiet{{end}}
@@ -49,6 +57,9 @@ tasks:
 
   python-checks:
     desc: Run Python type and lint checks
+    sources:
+      - pyproject.toml
+      - python/**
     cmds:
       - uv run mypy .  # TODO: add quiet flag when supported
       - uv run ruff check --fix {{if .QUIET}}--quiet{{end}}
