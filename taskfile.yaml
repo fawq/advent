@@ -3,42 +3,53 @@ version: "3"
 env:
   PYO3_PYTHON: '{{if eq OS "windows"}}{{.USER_WORKING_DIR}}\\.venv\\Scripts\\python.exe{{else}}.venv/bin/python{{end}}'
 
+vars:
+  QUIET: false
+
 tasks:
   default:
     desc: Rebuild mixed workspaces and run all checks
-    deps:
-      - generate-stubs
-      - sync-env
-      - rust-checks
-      - python-checks
+    cmds:
+      - task: generate-stubs
+        vars:
+          QUIET: true
+      - task: sync-env
+        vars:
+          QUIET: true
+      - task: rust-checks
+        vars:
+          QUIET: true
+      - task: python-checks
+        vars:
+          QUIET: true
 
   generate-stubs:
     desc: Generate stubs for mixed workspaces
     dir: mixed/algo
     cmds:
-      - cargo run --bin stub_gen
+      - cargo run --bin stub_gen {{if .QUIET}}--quiet{{end}}
 
   sync-env:
     desc: Sync Python environment using uv
     cmds:
-      - uv sync
+      - uv sync {{if .QUIET}}--quiet{{end}}
 
   rust-checks:
     desc: Run Rust checks
     cmds:
-      - cargo check
-      - cargo fmt --check
-      - cargo test
-      - cargo clippy --all-targets --all-features -- -D warnings
+      - cargo check {{if .QUIET}}--quiet{{end}}
+      - cargo fmt --check {{if .QUIET}}--quiet{{end}}
+      - cargo test {{if .QUIET}}--quiet{{end}}  # TODO: it will not quiet fully
+      - cargo clippy {{if .QUIET}}--quiet{{end}} --all-targets --all-features -- -D warnings 
 
   python-checks:
     desc: Run Python type and lint checks
     cmds:
-      - uv run mypy .
-      - uv run ruff check --fix
-      - uv run pytest
+      - uv run mypy .  # TODO: add quiet flag when supported
+      - uv run ruff check --fix {{if .QUIET}}--quiet{{end}}
+      - uv run pytest {{if .QUIET}}--quiet{{end}}  # TODO: it will not quiet fully
 
   python-reinstall:
     desc: Reinstall Python dependencies
     cmds:
-      - uv sync --reinstall
+      - uv sync --reinstall 
