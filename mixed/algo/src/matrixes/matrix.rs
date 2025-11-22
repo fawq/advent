@@ -42,11 +42,11 @@ macro_rules! create_matrix {
                 self.__str__()
             }
 
-            pub fn get_height(&self) -> usize {
+            pub const fn get_height(&self) -> usize {
                 self.height
             }
 
-            pub fn get_width(&self) -> usize {
+            pub const fn get_width(&self) -> usize {
                 self.width
             }
 
@@ -80,7 +80,7 @@ macro_rules! create_matrix {
                 self.get_element(position.row, position.column)
             }
 
-            pub fn is_in_bounds(&self, row: usize, column: usize) -> bool {
+            pub const fn is_in_bounds(&self, row: usize, column: usize) -> bool {
                 row < self.height && column < self.width
             }
         }

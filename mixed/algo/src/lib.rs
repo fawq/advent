@@ -4,7 +4,7 @@ mod positions;
 mod utils;
 use crate::graphs::{
     edge::Edge,
-    graph::{Graph, GraphType},
+    graph::{Graph, GraphDirection},
 };
 use crate::{
     matrixes::matrix::{
@@ -51,7 +51,7 @@ fn graphs_mod(parent: &Bound<PyModule>) -> PyResult<()> {
     let graphs = PyModule::new(parent.py(), "graphs")?;
 
     graphs.add_class::<Edge>()?;
-    graphs.add_class::<GraphType>()?;
+    graphs.add_class::<GraphDirection>()?;
     graphs.add_class::<Graph>()?;
 
     parent.add_submodule(&graphs)?;

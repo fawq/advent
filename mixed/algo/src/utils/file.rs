@@ -2,32 +2,41 @@ use numpy::IntoPyArray;
 use numpy::array::PyArray1;
 use numpy::array::PyArray2;
 use numpy::ndarray::{Array1, Array2, Axis, stack};
-use pyo3::{Bound, Python, pyfunction};
+use pyo3::{Bound, PyResult, Python, exceptions::PyValueError, pyfunction};
 use pyo3_stub_gen::derive::gen_stub_pyfunction;
 
 fn read_lines(file_path: &str) -> Array1<String> {
     let all_lines = match std::fs::read_to_string(file_path) {
-        Ok(content) => content.lines().map(|line| line.to_string()).collect(),
+        Ok(content) => content
+            .lines()
+            .map(std::string::ToString::to_string)
+            .collect(),
         Err(e) => panic!("Error reading file {file_path}: {e}"),
     };
 
     Array1::from_vec(all_lines)
 }
 
-fn read_array<T: std::str::FromStr + Clone>(line: &str) -> Array1<T> {
-    line.split_ascii_whitespace()
-        .map(|e| e.parse().ok().unwrap())
-        .collect()
+fn read_array<T: std::str::FromStr + Clone + Default>(line: &str) -> Array1<T> {
+    let vec: Vec<T> = line
+        .split_ascii_whitespace()
+        .map(|token| {
+            token
+                .parse::<T>()
+                .unwrap_or_else(|_| panic!("Failed to parse token '{token}' into target type"))
+        })
+        .collect();
+    Array1::from_vec(vec)
 }
 
-fn read_lines_to_array2d<T: std::str::FromStr + Clone>(file_path: &str) -> Array2<T> {
+fn read_lines_to_array2d<T: std::str::FromStr + Clone + Default>(
+    file_path: &str,
+) -> PyResult<Array2<T>> {
     let lines = read_lines(file_path);
     let arrays: Vec<Array1<T>> = lines.iter().map(|line| read_array(line)).collect();
-    stack(
-        Axis(0),
-        &arrays.iter().map(|a| a.view()).collect::<Vec<_>>(),
-    )
-    .unwrap()
+    let views: Vec<_> = arrays.iter().map(numpy::ndarray::ArrayBase::view).collect();
+    let stacked = stack(Axis(0), &views).map_err(|e| PyValueError::new_err(e.to_string()))?;
+    Ok(stacked)
 }
 
 #[gen_stub_pyfunction(module = "algo._core.utils")]
@@ -40,8 +49,12 @@ macro_rules! create_read_lines_to_array2d {
     ($name: ident, $type: ident) => {
         #[gen_stub_pyfunction(module = "algo._core.utils")]
         #[pyfunction]
-        pub fn $name<'py>(py: Python<'py>, file_path: &str) -> Bound<'py, PyArray2<$type>> {
-            read_lines_to_array2d::<$type>(file_path).into_pyarray(py)
+        pub fn $name<'py>(
+            py: Python<'py>,
+            file_path: &str,
+        ) -> PyResult<Bound<'py, PyArray2<$type>>> {
+            let arr = read_lines_to_array2d::<$type>(file_path)?;
+            Ok(arr.into_pyarray(py))
         }
     };
 }

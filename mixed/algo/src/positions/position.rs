@@ -1,5 +1,5 @@
 use crate::positions::vector::Vector;
-use pyo3::{pyclass, pymethods};
+use pyo3::{PyResult, pyclass, pymethods};
 use pyo3_stub_gen::derive::{gen_stub_pyclass, gen_stub_pyclass_enum, gen_stub_pymethods};
 
 #[gen_stub_pyclass_enum]
@@ -15,10 +15,10 @@ pub enum Direction {
 impl From<Direction> for Vector {
     fn from(direction: Direction) -> Self {
         match direction {
-            Direction::Up => Vector::new(-1, 0),
-            Direction::Down => Vector::new(1, 0),
-            Direction::Left => Vector::new(0, -1),
-            Direction::Right => Vector::new(0, 1),
+            Direction::Up => Self::new(-1, 0),
+            Direction::Down => Self::new(1, 0),
+            Direction::Left => Self::new(0, -1),
+            Direction::Right => Self::new(0, 1),
         }
     }
 }
@@ -35,7 +35,7 @@ pub struct Position {
 #[pymethods]
 impl Position {
     #[new]
-    pub fn new(row: usize, column: usize) -> Self {
+    pub const fn new(row: usize, column: usize) -> Self {
         Self { row, column }
     }
 
@@ -47,30 +47,29 @@ impl Position {
         self.__str__()
     }
 
-    pub fn get_new_position_with_vector(&self, vector: Vector) -> Position {
-        Position::new(
+    pub const fn get_new_position_with_vector(&self, vector: Vector) -> Self {
+        Self::new(
             self.row.saturating_add_signed(vector.add_row),
             self.column.saturating_add_signed(vector.add_column),
         )
     }
 
-    pub fn get_new_position_with_direction(&self, direction: Direction) -> Position {
+    pub fn get_new_position_with_direction(&self, direction: Direction) -> Self {
         self.get_new_position_with_vector(direction.into())
     }
 
-    pub fn set_new_position_with_vector(&mut self, vector: Vector) {
+    pub const fn set_new_position_with_vector(&mut self, vector: Vector) {
         self.row = self.row.saturating_add_signed(vector.add_row);
         self.column = self.column.saturating_add_signed(vector.add_column);
     }
 
     pub fn set_new_position_with_direction(&mut self, direction: Direction) {
-        self.set_new_position_with_vector(direction.into())
+        self.set_new_position_with_vector(direction.into());
     }
 
-    pub fn vector_to(&self, other: &Position) -> Vector {
-        Vector::new(
-            other.row as isize - self.row as isize,
-            other.column as isize - self.column as isize,
-        )
+    pub fn vector_to(&self, other: &Self) -> PyResult<Vector> {
+        let vector_row = isize::try_from(other.row)? - isize::try_from(self.row)?;
+        let vector_column = isize::try_from(other.column)? - isize::try_from(self.column)?;
+        Ok(Vector::new(vector_row, vector_column))
     }
 }

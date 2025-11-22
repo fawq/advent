@@ -13,21 +13,21 @@ pub struct Vector {
 #[pymethods]
 impl Vector {
     #[new]
-    pub fn new(add_row: isize, add_column: isize) -> Self {
+    pub const fn new(add_row: isize, add_column: isize) -> Self {
         Self {
             add_row,
             add_column,
         }
     }
 
-    pub fn __add__(&self, other: &Self) -> Self {
+    pub const fn __add__(&self, other: &Self) -> Self {
         Self::new(
             self.add_row + other.add_row,
             self.add_column + other.add_column,
         )
     }
 
-    pub fn __sub__(&self, other: &Self) -> Self {
+    pub const fn __sub__(&self, other: &Self) -> Self {
         Self::new(
             self.add_row - other.add_row,
             self.add_column - other.add_column,
@@ -42,15 +42,15 @@ impl Vector {
         self.__str__()
     }
 
-    pub fn scalar_mul(&self, scalar: isize) -> Self {
+    pub const fn scalar_mul(&self, scalar: isize) -> Self {
         Self::new(self.add_row * scalar, self.add_column * scalar)
     }
 
-    pub fn inverse(&self) -> Self {
+    pub const fn inverse(&self) -> Self {
         Self::new(-self.add_row, -self.add_column)
     }
 
-    pub fn taxicab_norm(&self) -> usize {
+    pub const fn taxicab_norm(&self) -> usize {
         self.add_row.unsigned_abs() + self.add_column.unsigned_abs()
     }
 }

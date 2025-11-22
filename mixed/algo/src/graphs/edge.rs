@@ -13,7 +13,7 @@ pub struct Edge {
 #[pymethods]
 impl Edge {
     #[new]
-    pub fn new(from_node: usize, to_node: usize) -> Self {
+    pub const fn new(from_node: usize, to_node: usize) -> Self {
         Self { from_node, to_node }
     }
 
@@ -25,7 +25,7 @@ impl Edge {
         self.__str__()
     }
 
-    pub fn reverse(&self) -> Self {
+    pub const fn reverse(&self) -> Self {
         Self {
             from_node: self.to_node,
             to_node: self.from_node,

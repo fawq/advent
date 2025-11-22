@@ -17,6 +17,9 @@ pyo3-stub-gen.workspace = true
 numpy.workspace = true
 ndarray.workspace = true
 
+[lints]
+workspace = true
+
 [[bin]]
 name = "stub_gen"
 doc = false

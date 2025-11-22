@@ -6,7 +6,7 @@ use std::collections::HashSet;
 #[gen_stub_pyclass_enum]
 #[pyclass(eq, eq_int, module = "algo._core.graphs")]
 #[derive(Eq, PartialEq, Debug, Clone, Copy)]
-pub enum GraphType {
+pub enum GraphDirection {
     OneDirectional,
     BiDirectional,
 }
@@ -17,18 +17,18 @@ pub enum GraphType {
 pub struct Graph {
     nodes: HashSet<usize>,
     edges: HashSet<Edge>,
-    graph_type: GraphType,
+    direction: GraphDirection,
 }
 
 #[gen_stub_pymethods]
 #[pymethods]
 impl Graph {
     #[new]
-    pub fn new(graph_type: GraphType) -> Self {
+    pub fn new(direction: GraphDirection) -> Self {
         Self {
             nodes: HashSet::new(),
             edges: HashSet::new(),
-            graph_type,
+            direction,
         }
     }
 
@@ -37,11 +37,11 @@ impl Graph {
     }
 
     pub fn add_edge(&mut self, edge: Edge) {
-        match self.graph_type {
-            GraphType::OneDirectional => {
+        match self.direction {
+            GraphDirection::OneDirectional => {
                 self.edges.insert(edge);
             },
-            GraphType::BiDirectional => {
+            GraphDirection::BiDirectional => {
                 self.edges.insert(edge);
                 self.edges.insert(edge.reverse());
             },
@@ -62,11 +62,11 @@ impl Graph {
     }
 
     pub fn remove_edge(&mut self, edge: Edge) {
-        match self.graph_type {
-            GraphType::OneDirectional => {
+        match self.direction {
+            GraphDirection::OneDirectional => {
                 self.edges.remove(&edge);
             },
-            GraphType::BiDirectional => {
+            GraphDirection::BiDirectional => {
                 self.edges.remove(&edge);
                 self.edges.remove(&edge.reverse());
             },
@@ -77,7 +77,7 @@ impl Graph {
         self.remove_edge(Edge::new(from_node, to_node));
     }
 
-    pub fn get_nodes(&self) -> &HashSet<usize> {
+    pub const fn get_nodes(&self) -> &HashSet<usize> {
         &self.nodes
     }
 
@@ -87,20 +87,18 @@ impl Graph {
     }
 
     pub fn get_edges_from_node(&self, node: usize) -> HashSet<Edge> {
-        //TODO: rethink cloned for this
         self.edges
             .iter()
             .filter(|edge| edge.from_node == node)
-            .cloned()
+            .copied()
             .collect()
     }
 
     pub fn get_edges_to_node(&self, node: usize) -> HashSet<Edge> {
-        //TODO: rethink cloned for this
         self.edges
             .iter()
             .filter(|edge| edge.to_node == node)
-            .cloned()
+            .copied()
             .collect()
     }
 
