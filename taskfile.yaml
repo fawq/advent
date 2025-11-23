@@ -65,6 +65,7 @@ tasks:
       - uv run mypy .  # TODO: add quiet flag when supported
       - uv run ruff check --fix {{if .QUIET}}--quiet{{end}}
       - uv run pytest {{if .QUIET}}--quiet{{end}}  # TODO: it will not quiet fully
+      - uv run pyright  # TODO: add quiet flag when supported
 
   python-reinstall:
     desc: Reinstall Python dependencies
