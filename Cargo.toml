@@ -12,8 +12,8 @@ rust-version = "1.88"
 
 [workspace.dependencies]
 pyo3 = { version = "=0.27.1", features = ["extension-module", "abi3-py312"] }
-pyo3-stub-gen = {version ="=0.17.0", features = ["numpy"]}
-numpy = "=0.27"
+pyo3-stub-gen = {version ="=0.17.2", features = ["numpy"]}
+numpy = "=0.27.0"
 ndarray = "=0.17.1"
 
 [workspace.lints.clippy]

@@ -1,0 +1,10 @@
+from advent_2025_01.task_01 import day_01_task_01_main
+from advent_2025_01.task_02 import day_01_task_02_main
+
+
+def main() -> None:
+    print(day_01_task_01_main())
+    print(day_01_task_02_main())
+
+if __name__ == "__main__":
+    main()
