@@ -8,7 +8,7 @@ edition = "2024"
 description = "Advent code"
 authors = ["Krystian Krakowski <kkrakowski22@gmail.com>"]
 readme = "README.md"
-rust-version = "1.88"
+rust-version = "1.93"
 
 [workspace.dependencies]
 pyo3 = { version = "=0.27.2", features = ["extension-module", "abi3-py312"] }

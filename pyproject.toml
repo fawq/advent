@@ -3,7 +3,7 @@ name = "advent"
 version = "0.1.0"
 description = "Advent code"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.13"
 authors = [{name = "Krystian Krakowski", email = "kkrakowski22@gmail.com"}]
 dependencies = [
     "numba==0.63.1",
@@ -47,10 +47,8 @@ ignore = [
 ]
 
 [tool.pyright]
-typeCheckingMode = "basic"
-stubPath = "typings"
-reportMissingModuleSource = false
 pythonVersion = "3.13"
+reportMissingModuleSource = false
 
 [[tool.mypy.overrides]]
 module = ["numba.*"]
