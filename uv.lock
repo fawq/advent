@@ -20,12 +20,12 @@ dependencies = [
     { name = "algo" },
     { name = "numba" },
     { name = "numpy" },
-    { name = "pyright" },
 ]
 
 [package.dev-dependencies]
 dev = [
     { name = "mypy" },
+    { name = "pyright" },
     { name = "pytest" },
     { name = "ruff" },
 ]
@@ -35,12 +35,12 @@ requires-dist = [
     { name = "algo", editable = "mixed/algo" },
     { name = "numba", specifier = "==0.63.1" },
     { name = "numpy", specifier = "==2.3.5" },
-    { name = "pyright", specifier = "==1.1.408" },
 ]
 
 [package.metadata.requires-dev]
 dev = [
     { name = "mypy", specifier = "==1.19.1" },
+    { name = "pyright", specifier = "==1.1.408" },
     { name = "pytest", specifier = "==9.0.2" },
     { name = "ruff", specifier = "==0.14.14" },
 ]

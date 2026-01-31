@@ -9,7 +9,6 @@ dependencies = [
     "numba==0.63.1",
     "numpy==2.3.5",
     "algo",
-    "pyright==1.1.408",
 ]
 
 [dependency-groups]
@@ -17,6 +16,7 @@ dev = [
     "mypy==1.19.1",
     "pytest==9.0.2",
     "ruff==0.14.14",
+    "pyright==1.1.408",
 ]
 
 [tool.uv.workspace]
@@ -50,7 +50,7 @@ ignore = [
 typeCheckingMode = "basic"
 stubPath = "typings"
 reportMissingModuleSource = false
-pythonVersion = "3.12"
+pythonVersion = "3.13"
 
 [[tool.mypy.overrides]]
 module = ["numba.*"]
