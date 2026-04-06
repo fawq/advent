@@ -34,7 +34,7 @@ fn read_lines_to_array2d<T: std::str::FromStr + Clone + Default>(
 ) -> PyResult<Array2<T>> {
     let lines = read_lines(file_path);
     let arrays: Vec<Array1<T>> = lines.iter().map(|line| read_array(line)).collect();
-    let views: Vec<_> = arrays.iter().map(numpy::ndarray::ArrayBase::view).collect();
+    let views: Vec<_> = arrays.iter().map(|array| array.view()).collect();
     let stacked = stack(Axis(0), &views).map_err(|e| PyValueError::new_err(e.to_string()))?;
     Ok(stacked)
 }

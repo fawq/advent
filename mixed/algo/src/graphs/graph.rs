@@ -4,7 +4,7 @@ use pyo3_stub_gen::derive::{gen_stub_pyclass, gen_stub_pyclass_enum, gen_stub_py
 use std::collections::HashSet;
 
 #[gen_stub_pyclass_enum]
-#[pyclass(eq, eq_int, module = "algo._core.graphs")]
+#[pyclass(eq, eq_int, from_py_object, module = "algo._core.graphs")]
 #[derive(Eq, PartialEq, Debug, Clone, Copy)]
 pub enum GraphDirection {
     OneDirectional,
